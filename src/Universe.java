@@ -125,8 +125,8 @@ public class Universe implements Scene {
 		travel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
-				if(destPlanet != null && cost <= ship.getFuel()) {
-					ship.decreaseFuel(cost); 
+				if(destPlanet != null && cost <= ship.getGas()) {
+					ship.decreaseGas(cost); 
 					planet = destPlanet;
 					refresh();
 				}
@@ -174,7 +174,7 @@ public class Universe implements Scene {
 		screen.setScene(this);
 		Game.setPlanet(planet);
 		currentPlanetText.setText("Current Planet: \t" + planet.getName());
-		FuelText.setText("Fuel: " + ship.getFuel() + " Fuel Cost: " + 0);
+		FuelText.setText("Fuel: " + ship.getGas() + " Fuel Cost: " + 0);
 	}
 
 	/**
@@ -199,7 +199,7 @@ public class Universe implements Scene {
 		else
 			Fuel%=75;
 		
-		FuelText.setText("Fuel: " + player.getShip().getFuel() + " Fuel Cost: " + Fuel);
+		FuelText.setText("Fuel: " + player.getShip().getGas() + " Fuel Cost: " + Fuel);
 
 		return Fuel;
 	}
