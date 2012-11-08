@@ -3,25 +3,49 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 
+/**
+ * Represents a Good that is traded in the game.
+ * 
+ * @author TeamTroll
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class Good extends JPanel {
-	Random rand = new Random();
-	
+	private Random rand = new Random();
 	private Planet planet;
-	private Market market;
 	private Transaction trans;
-	private String name;
 	private JLabel nameLabel, priceLabel, quantityLabel;
-	private JButton plus, minus;
+	private JButton plusButton, minusButton;
+	private String name;
 	private int price, quantity;
 
 	private final int MTLP, MTLU, TTP, BP, IPL, VAR, MTL, MTH;
 
-	public Good(Planet planet, final Market market, final Transaction trans, final String name, int MTLP, 
-			int MTLU, int TTP, int BP, int IPL, int VAR, int MTL, int MTH) {
+	/**
+	 * Creates the Good.
+	 * 
+	 * @param Planet
+	 *            planet The planet of the game.
+	 * @param Market
+	 *            market The market of the game.
+	 * @param Transaction
+	 *            trans The transaction of the game.
+	 * @param String
+	 *            name The name of the good.
+	 * @param int MTLP The minimum level of the planet needed to buy the good.
+	 * @param int MTLU The minimum level of the planet needed to sell the good.
+	 * @param int TTP
+	 * @param int BP The base price of the good.
+	 * @param int IPL
+	 * @param int VAR The variance in price of the good.
+	 * @param int MTL
+	 * @param int MTH
+	 */
+	public Good(Planet planet, final Market market, final Transaction trans,
+			final String name, int MTLP, int MTLU, int TTP, int BP, int IPL,
+			int VAR, int MTL, int MTH) {
 		this.planet = planet;
-		this.market = market;
-		this.trans = trans;
+		this.setTrans(trans);
 
 		this.name = name;
 		this.MTLP = MTLP;
@@ -41,24 +65,39 @@ public class Good extends JPanel {
 		priceLabel = new JLabel("$" + price);
 		quantityLabel = new JLabel("0");
 
-		plus = new JButton("+");
-		minus = new JButton("-");
+		plusButton = new JButton("+");
+		minusButton = new JButton("-");
 
-		plus.addActionListener(new ActionListener() {
+		plusButton.addActionListener(new ActionListener() {
+			/**
+			 * Increases the amount of a good being bought or sold.
+			 * 
+			 * @param ActionEvent
+			 *            e The created action event.
+			 */
 			public void actionPerformed(ActionEvent e) {
-				if(market.buy())
+				if (market.buy())
 					quantityLabel.setText("" + trans.add(name, getBuyPrice()));
 				else
-					quantityLabel.setText("" + (-1*trans.add(name, getSellPrice())));
+					quantityLabel.setText(""
+							+ (-1 * trans.add(name, getSellPrice())));
 			}
 		});
 
-		minus.addActionListener(new ActionListener() {
-			public void	actionPerformed(ActionEvent e) {
-				if(market.buy())
-					quantityLabel.setText("" + trans.remove(name, getBuyPrice()));
+		minusButton.addActionListener(new ActionListener() {
+			/**
+			 * Decrease the amount of a good being bought or sold.
+			 * 
+			 * @param ActionEvent
+			 *            e The created action event.
+			 */
+			public void actionPerformed(ActionEvent e) {
+				if (market.buy())
+					quantityLabel.setText(""
+							+ trans.remove(name, getBuyPrice()));
 				else
-					quantityLabel.setText("" + (-1*trans.remove(name, getSellPrice())));
+					quantityLabel.setText(""
+							+ (-1 * trans.remove(name, getSellPrice())));
 			}
 		});
 
@@ -68,30 +107,74 @@ public class Good extends JPanel {
 		add(priceLabel);
 		add(quantityLabel);
 
-		add(plus);
-		add(minus);
+		add(plusButton);
+		add(minusButton);
 	}
 
+	/**
+	 * Helper method to calculate the price of the good based on the stats.
+	 * passed into the class.
+	 */
 	private int price() {
-		return (BP + (IPL*(planet.getTechLevel() - MTLP)) + (rand.nextInt(2*VAR-1)-VAR));
+		return (BP + (IPL * (planet.getTechLevel() - MTLP)) + (rand
+				.nextInt(2 * VAR - 1) - VAR));
 	}
 
+	/**
+	 * Getter for the buying price.
+	 * 
+	 * @return int The buying price of the good.
+	 */
 	public int getBuyPrice() {
 		return price;
 	}
-	
+
+	/**
+	 * Getter for the selling price.
+	 * 
+	 * @return int The selling price of the good.
+	 */
 	public int getSellPrice() {
-		return (int)(price*0.75);
+		return (int) (price * 0.75);
 	}
 
+	/**
+	 * Disable the plus and minus buttons of a good that is too high level to be
+	 * sold in the current market.
+	 */
 	public void disable() {
-		plus.setEnabled(false);
-		minus.setEnabled(false);
+		plusButton.setEnabled(false);
+		minusButton.setEnabled(false);
 	}
 
+	/**
+	 * Updates the transaction that the good currently deals with.
+	 * 
+	 * @param Transaction
+	 *            trans The current transaction occurring in the market.
+	 */
 	public void reset(Transaction trans) {
-		this.trans = trans;
+		this.setTrans(trans);
 		quantity = 0;
 		quantityLabel.setText(quantity + "");
+	}
+
+	/**
+	 * Getter for the transaction.
+	 * 
+	 * @return Transaction The current transaction.
+	 */
+	public Transaction getTrans() {
+		return trans;
+	}
+
+	/**
+	 * Setter for the transaction.
+	 * 
+	 * @param Transaction
+	 *            trans The transaction to set
+	 */
+	public void setTrans(Transaction trans) {
+		this.trans = trans;
 	}
 }

@@ -1,14 +1,25 @@
 import javax.swing.*;
-
 import java.awt.event.*;
 import java.awt.*;
 
+/**
+ * Scene to let user make an account.
+ * 
+ * @author TeamTroll
+ * @version 1.0
+ */
 public class CreateAccount implements Scene {
 	private GameScreen screen;
 	private JTextField userText, passText, repassText;
-	private JLabel userLabel, passLabel, repassLabel, output;
-	private JButton create;
+	private JLabel userLabel, passLabel, repassLabel, outputLabel;
+	private JButton createButton, backButton;
 
+	/**
+	 * Creates the create account scene.
+	 * 
+	 * @param GameScreen
+	 *            screen The screen of the game.
+	 */
 	public CreateAccount(final GameScreen screen) {
 		this.screen = screen;
 
@@ -19,49 +30,80 @@ public class CreateAccount implements Scene {
 		userLabel = new JLabel("Username: ");
 		passLabel = new JLabel("Password: ");
 		repassLabel = new JLabel("Reenter Password: ");
-		output = new JLabel();
+		outputLabel = new JLabel();
 
-		create = new JButton("Create");
-		create.addActionListener(new ActionListener() {
+		createButton = new JButton("Create");
+		createButton.addActionListener(new ActionListener() {
+			/**
+			 * Creates a new account.
+			 * 
+			 * @param ActionEvent
+			 *            e The created action event.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				createAccount();
 			}
 		});
+
+		backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			/**
+			 * Goes back to login screen.
+			 * 
+			 * @param ActionEvent
+			 *            e The created action event.
+			 */
+			public void actionPerformed(ActionEvent e) {
+				screen.setScene(new LogIn(screen));
+			}
+		});
 	}
 
+	/**
+	 * Creates the user account with the text entered in the fields.
+	 */
 	public void createAccount() {
 		String user = userText.getText();
 		String pass = passText.getText();
 		String repass = repassText.getText();
 
-		if(user.length() == 0)
-			output.setText("Must enter a username.");
-		else if(pass.length() == 0)
-			output.setText("Must enter a password.");
-		else if(!pass.equals(repass)) 
-			output.setText("Passwords do not match.");
+		if (user.length() == 0)
+			outputLabel.setText("Must enter a username.");
+		else if (pass.length() == 0)
+			outputLabel.setText("Must enter a password.");
+		else if (!pass.equals(repass))
+			outputLabel.setText("Passwords do not match.");
 		else {
-			Database.addAccount(new UserAccount(user, pass));
+			Game.addAccount(new UserAccount(user, pass));
 			screen.setScene(new LogIn(screen));
 		}
 
-		Database.printAccounts();
+		// Database.printAccounts();
 	}
 
+	/**
+	 * Paints the components onto the screen.
+	 * 
+	 * @param JPanel
+	 *            p The panel to contain the components.
+	 * @param Graphics
+	 *            g The graphics to the corresponding page.
+	 */
 	@Override
 	public void paint(JPanel p, Graphics g) {
 		p.removeAll();
-		
+
 		p.add(userLabel);
 		p.add(userText);
 		p.add(passLabel);
 		p.add(passText);
 		p.add(repassLabel);
 		p.add(repassText);
+		p.add(outputLabel);
 
-		p.add(output);
-		p.add(create);
+		p.add(createButton);
+		p.add(backButton);
 
 		p.revalidate();
 	}
-}	
+}

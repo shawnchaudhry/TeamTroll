@@ -3,13 +3,19 @@ import java.awt.*;
 import java.util.*;
 import java.awt.event.*;
 
+/**
+ * Scene to let the user travel to the universe.
+ * 
+ * @author TeamTroll
+ * @version 1.0
+ */
 public class Universe implements Scene {
 	private ImageIcon background, shipIcon;
 	private Planet[] planets;
 	private int numPlanets = 13;
 	private GameScreen screen;
-	private JTextField currentPlanetText, destPlanetText, FuelText;
-	private JButton land, travel;
+	private JTextField currentPlanetText, destPlanetText, fuelText;
+	private JButton landButton, travelButton;
 	private Planet planet, destPlanet;
 	private Random rand;
 	private Player player;
@@ -34,8 +40,8 @@ public class Universe implements Scene {
 			"Torin", "Triacus", "Turkana", "Tyrus", "Umberlee", "Utopia",
 			"Vadera", "Vagra", "Vandor", "Ventax", "Xenon", "Xerxes", "Yew",
 			"Yojimbo", "Zalkon", "Zuul" };
-	
-	private String[] shipArr = {"img/spaceship1.png"};
+
+	private String[] shipArr = { "img/spaceship1.png" };
 
 	private Point[] loc = { new Point(25, 135), new Point(155, 165),
 			new Point(275, 115), new Point(400, 125), new Point(120, 270),
@@ -80,6 +86,12 @@ public class Universe implements Scene {
 			"img/planet59.png", "img/planet60.png", "img/planet61.png",
 			"img/planet62.png", "img/planet63.png" };
 
+	/**
+	 * Creates the universe.
+	 * 
+	 * @param GameScreen
+	 *            screen The screen of the game.
+	 */
 	public Universe(final GameScreen screen) {
 		this.screen = screen;
 		rand = new Random();
@@ -88,15 +100,17 @@ public class Universe implements Scene {
 		int nameLength = namesArr.length, fileLength = filenames.length, nameNum, fileNum;
 
 		shipIcon = new ImageIcon(shipArr[0]);
-		
+
 		planets = new Planet[numPlanets--];
 
 		for (int size = numPlanets; 0 <= size; size--) {
 			nameNum = rand.nextInt(nameLength);
 			fileNum = rand.nextInt(fileLength);
 
-			planets[size] = new Planet(screen, namesArr[nameNum], loc[size], tech[rand.nextInt(tech.length)],
-					res[rand.nextInt(res.length)], pol[rand.nextInt(pol.length)], filenames[fileNum]);
+			planets[size] = new Planet(screen, namesArr[nameNum], loc[size],
+					tech[rand.nextInt(tech.length)],
+					res[rand.nextInt(res.length)],
+					pol[rand.nextInt(pol.length)], filenames[fileNum]);
 
 			namesArr[nameNum] = namesArr[--nameLength];
 			filenames[fileNum] = filenames[--fileLength];
@@ -108,35 +122,56 @@ public class Universe implements Scene {
 
 		player = Game.getPlayer();
 		ship = player.getShip();
-		currentPlanetText = new JTextField("Current Planet: \t" + planet.getName(), 25);
-		destPlanetText = new JTextField("Destination Planet: \t" + planet.getName(), 25);
-		FuelText = new JTextField("Fuel Cost: 0", 15);
+		currentPlanetText = new JTextField("Current Planet: "
+				+ planet.getName(), 25);
+		destPlanetText = new JTextField("Destination Planet: "
+				+ planet.getName(), 25);
+		fuelText = new JTextField("Fuel Cost: 0", 15);
 
-		land = new JButton("Land");
-		travel = new JButton("Travel");
-		travel.setEnabled(false);
+		landButton = new JButton("Land");
+		travelButton = new JButton("Travel");
+		travelButton.setEnabled(false);
 
-		land.addActionListener(new ActionListener() {
+		landButton.addActionListener(new ActionListener() {
+			/**
+			 * Lands on the planet and goes to the planet scene.
+			 * 
+			 * @param ActionEvent
+			 *            e The created action event.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				screen.setScene(planet);
 			}
 		});
 
-		travel.addActionListener(new ActionListener() {
+		travelButton.addActionListener(new ActionListener() {
+			/**
+			 * Travels to the selected planet and sets the planet scene.
+			 * 
+			 * @param ActionEvent
+			 *            e The created action event.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
-				if(destPlanet != null && cost <= ship.getGas()) {
-					ship.decreaseGas(cost); 
+				if (destPlanet != null && cost <= ship.getFuel()) {
+					ship.decreaseFuel(cost);
 					planet = destPlanet;
 					refresh();
-				}
-				else
-					FuelText.setText("Not enough Fuel");
+				} else
+					fuelText.setText("Not enough Fuel");
 			}
 		});
 
 	}
 
+	/**
+	 * Paints the components onto the screen.
+	 * 
+	 * @param JPanel
+	 *            p The panel to contain the components.
+	 * @param Graphics
+	 *            g The graphics to the corresponding page.
+	 */
 	public void paint(JPanel p, Graphics g) {
 		p.removeAll();
 
@@ -146,35 +181,39 @@ public class Universe implements Scene {
 			planet.draw(p, g);
 
 		Point currLoc = planet.getLoc();
-		shipIcon.paintIcon(null, g, currLoc.x , currLoc.y );
+		shipIcon.paintIcon(null, g, currLoc.x, currLoc.y);
 
 		p.add(currentPlanetText);
-		p.add(land);
+		p.add(landButton);
 		p.add(destPlanetText);
-		p.add(travel);
-		p.add(FuelText);
+		p.add(travelButton);
+		p.add(fuelText);
 
 		p.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {				
+			public void mousePressed(MouseEvent e) {
 				for (Planet p : planets)
 					if (p.getRect().contains(e.getPoint())) {
-						travel.setEnabled(true);
+						travelButton.setEnabled(true);
 						destPlanet = p;
-						destPlanetText.setText("Destination Planet: \t" + p.getName());
+						destPlanetText.setText("Destination Planet: "
+								+ p.getName());
 						calcFuel(planet.getLoc(), destPlanet.getLoc());
 					}
-			}			
+			}
 		});
 
 		p.revalidate();
 
 	}
-	
+
+	/**
+	 * Refreshes the view of the current planet.
+	 */
 	public void refresh() {
 		screen.setScene(this);
 		Game.setPlanet(planet);
-		currentPlanetText.setText("Current Planet: \t" + planet.getName());
-		FuelText.setText("Fuel: " + ship.getGas() + " Fuel Cost: " + 0);
+		currentPlanetText.setText("Current Planet: " + planet.getName());
+		fuelText.setText("Fuel: " + ship.getFuel() + " Fuel Cost: " + 0);
 	}
 
 	/**
@@ -187,20 +226,34 @@ public class Universe implements Scene {
 		return planets[i];
 	}
 
+	/**
+	 * Returns the array of planets.
+	 * 
+	 * @return Planet[] The array of planets.
+	 */
 	public Planet[] getPlanets() {
 		return planets;
 	}
 
+	/**
+	 * Calculates the cost of traveling from two points.
+	 * 
+	 * @param Point
+	 *            curr The point of current location.
+	 * @param Point
+	 *            dest The point of destination location.
+	 * 
+	 * @return int The amount of fuel it costs to travel the distance.
+	 */
 	public int calcFuel(Point curr, Point dest) {
-		int Fuel = (int)Math.sqrt(Math.pow((curr.x-dest.x),2)+Math.pow((curr.y-dest.y),2));
-				
-		if(Fuel != 0 && Fuel%75 == 0)
-			Fuel = 35 + rand.nextInt(40);
-		else
-			Fuel%=75;
-		
-		FuelText.setText("Fuel: " + player.getShip().getGas() + " Fuel Cost: " + Fuel);
+		int fuel = (int) Math.sqrt(Math.pow((curr.x - dest.x), 2)
+				+ Math.pow((curr.y - dest.y), 2));
 
-		return Fuel;
+		fuel = (35 + rand.nextInt(30)) % 65;
+
+		fuelText.setText("Fuel: " + player.getShip().getFuel() + " Fuel Cost: "
+				+ fuel);
+
+		return fuel;
 	}
 }
