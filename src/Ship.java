@@ -7,7 +7,11 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class Ship implements Serializable {
-    private int fuel, cargoBay;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int fuel, cargoBay;
     private String type;
      
     /** 
