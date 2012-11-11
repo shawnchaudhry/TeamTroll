@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.awt.event.*;
+import java.io.Serializable;
 
 /**
  * Scene to let the user travel to the universe.
@@ -9,7 +10,11 @@ import java.awt.event.*;
  * @author TeamTroll
  * @version 1.0
  */
-public class Universe implements Scene {
+public class Universe implements Scene, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ImageIcon background, shipIcon;
 	private Planet[] planets;
 	private int numPlanets = 13;
@@ -117,10 +122,13 @@ public class Universe implements Scene {
 		}
 
 		planet = planets[rand.nextInt(13)];
-		Game.setPlanet(planet);
-		Game.setUniverse(this);
+		// set to screen.game.setPlanet(planet)
+		// and screen.game.setUniverse(this).
+		screen.game.setPlanet(planet);
+		screen.game.setUniverse(this);
 
-		player = Game.getPlayer();
+		// Changed to screen.game.getPlayer();
+		player = screen.game.getPlayer();
 		ship = player.getShip();
 		currentPlanetText = new JTextField("Current Planet: "
 				+ planet.getName(), 25);
@@ -211,7 +219,8 @@ public class Universe implements Scene {
 	 */
 	public void refresh() {
 		screen.setScene(this);
-		Game.setPlanet(planet);
+		// Changed to screen.game.setPlanet(planet);
+		screen.game.setPlanet(planet);
 		currentPlanetText.setText("Current Planet: " + planet.getName());
 		fuelText.setText("Fuel: " + ship.getFuel() + " Fuel Cost: " + 0);
 	}

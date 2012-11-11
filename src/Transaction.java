@@ -9,6 +9,7 @@ import java.util.*;
  * @author TeamTroll
  * @version 1.0
  */
+@SuppressWarnings("serial")
 public class Transaction extends JPanel {
     private JLabel transLabel;
     private Player player;
@@ -21,7 +22,6 @@ public class Transaction extends JPanel {
      *
      * @param GameScreen screen The screen of the game.
      */
-    @SuppressWarnings("unchecked")
     public Transaction(Player player, Market market) {
         this.player = player;
         this.market = market;

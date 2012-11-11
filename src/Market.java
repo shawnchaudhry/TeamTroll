@@ -1,15 +1,22 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
-
+// I basically made it so that a few of the references for Game.whatever was changed to
+// screen.game.whatever. Im sorry if this isn't how you planned for it to work but I 
+// couldn't think of anything better. Let me know if you want me to change it.
 /**
  * Scene to let user visit the planet's market.
  * 
  * @author TeamTroll
  * @version 1.0
  */
-public class Market implements Scene {
+public class Market implements Scene, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GameScreen screen;
 	private Planet planet;
 	private Player player;
@@ -33,7 +40,7 @@ public class Market implements Scene {
 	public Market(final GameScreen screen, Planet planet) {
 		this.screen = screen;
 		this.planet = planet;
-		this.player = Game.getPlayer();
+		this.player = screen.game.getPlayer();
 		inventory = player.getInventory();
 		trans = new Transaction(player, this);
 
@@ -84,9 +91,9 @@ public class Market implements Scene {
 				trans = trans.confirm();
 
 			refresh();
-
+			// Again, I set it to screen.game.getPlanet();
 			if (e.getSource() == planetButton)
-				screen.setScene(Game.getPlanet());
+				screen.setScene(screen.game.getPlanet());
 		}
 	}
 
@@ -122,7 +129,8 @@ public class Market implements Scene {
 	 * Helper method used to refresh the view of a transaction.
 	 */
 	private void refresh() {
-		player = Game.getPlayer();
+		// Set to screen.game.getPlayer();
+		player = screen.game.getPlayer();
 		inventoryLabel1.setText(player.getInventory1());
 		inventoryLabel2.setText(player.getInventory2());
 

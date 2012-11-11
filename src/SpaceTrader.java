@@ -11,11 +11,10 @@ public class SpaceTrader extends JFrame {
     /**
      * Main method.
      */
+	
+	// This method now sets up the driver object and then calls the run method.
     public static void main(String[] args) {
-        JFrame frame = new JFrame("SPACE TRADER");
-        frame.add(new GameScreen());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.pack();
+        Driver driver = new Driver();
+        driver.run();
     }
 }

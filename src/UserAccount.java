@@ -1,10 +1,16 @@
+import java.io.Serializable;
+
 /**
  * Represents a user account in the game.
  * 
  * @author TeamTroll
  * @version 1.0
  */
-public class UserAccount {
+public class UserAccount implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String username, password;
 
 	/**

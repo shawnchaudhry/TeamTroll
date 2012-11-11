@@ -67,7 +67,7 @@ public class LogIn implements Scene {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				Game.skip();
+				screen.game.skip();
 			}
 		});
 	}
@@ -79,17 +79,22 @@ public class LogIn implements Scene {
 	public void login() {
 		String userInput = userText.getText();
 		String passInput = passText.getText();
-
+		// So I rewrote the Game.checkAccount, Game.getPlayer, etc. to
+		// screen.game.checkAccount etc.
+		// I really thought it'd be easier to access the information this way
+		// especially after we store
+		// it.
 		if (userText.getText().length() == 0
 				&& passText.getText().length() == 0)
 			outputLabel.setText("Enter account information");
-		else if (!Game.checkAccount(new UserAccount(userInput, passInput)))
+		else if (!screen.game
+				.checkAccount(new UserAccount(userInput, passInput)))
 			outputLabel.setText("Invalid Account");
-		else if (Game.getPlayer() == null) {
-			Game.setUserAccount(new UserAccount(userInput, passInput));
+		else if (screen.game.getPlayer() == null) {
+			screen.game.setUserAccount(new UserAccount(userInput, passInput));
 			screen.setScene(new CreatePlayer(screen));
 		} else
-			screen.setScene(Game.getUniverse());
+			screen.setScene(screen.game.getUniverse());
 	}
 
 	/**

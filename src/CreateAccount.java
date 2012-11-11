@@ -74,7 +74,7 @@ public class CreateAccount implements Scene {
 		else if (!pass.equals(repass))
 			outputLabel.setText("Passwords do not match.");
 		else {
-			Game.addAccount(new UserAccount(user, pass));
+			screen.game.addAccount(new UserAccount(user, pass));
 			screen.setScene(new LogIn(screen));
 		}
 

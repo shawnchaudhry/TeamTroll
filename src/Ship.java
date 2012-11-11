@@ -1,11 +1,17 @@
+import java.io.Serializable;
+
 /**
  * Represents a ship.
  *
  * @author TeamTroll
  * @version 1.0
  */
-public class Ship {
-    private int fuel, cargoBay;
+public class Ship implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int fuel, cargoBay;
     private String type;
      
     /** 
