@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Serializable;
 
 /**
  * Scene to display the planets of the universe. Also represents actual planet
@@ -9,7 +10,11 @@ import java.awt.event.*;
  * @author TeamTroll
  * @version 1.0
  */
-public class Planet implements Scene {
+public class Planet implements Scene, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GameScreen screen;
 	private String name, tech, res, pol;
 	private ImageIcon img;
@@ -86,7 +91,8 @@ public class Planet implements Scene {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				screen.setScene(Game.getUniverse());
+				//Set to screen.game.getUniverse();
+				screen.setScene(screen.game.getUniverse());
 			}
 		});
 

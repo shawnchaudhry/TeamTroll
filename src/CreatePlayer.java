@@ -77,11 +77,11 @@ public class CreatePlayer implements Scene {
 				else if (stats != 0)
 					outputLabel.setText("Must allocate all skill points.");
 				else {
-					Game.setPlayer(new Player(playerName, fight, trade, engin,
+					screen.game.setPlayer(new Player(playerName, fight, trade, engin,
 							pilot));
-					Game.setUniverse(new Universe(screen));
+					screen.game.setUniverse(new Universe(screen));
 
-					screen.setScene(Game.getUniverse());
+					screen.setScene(screen.game.getUniverse());
 				}
 			}
 		});

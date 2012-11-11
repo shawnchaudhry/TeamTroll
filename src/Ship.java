@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * Represents a ship.
  *
  * @author TeamTroll
  * @version 1.0
  */
-public class Ship {
+public class Ship implements Serializable {
     private int fuel, cargoBay;
     private String type;
      

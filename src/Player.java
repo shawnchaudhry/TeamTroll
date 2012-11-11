@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.*;
  
 /**
@@ -6,8 +7,12 @@ import java.util.*;
  * @author TeamTroll
  * @version 1.0
  */
-public class Player {
-    private String name, inventoryString;
+public class Player implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name, inventoryString;
     private int fight, trade, engin, pilot, money, cargoBay;
     private Hashtable<String, Integer> inventory;
     private Ship ship;

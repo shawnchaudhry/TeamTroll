@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,13 +8,17 @@ import java.util.*;
  * @author TeamTroll
  * @version 1.0
  */
-public class Game {
-	private static GameScreen screen;
-	private static UserAccount userAccount;
-	private static Player player;
-	private static Universe universe;
-	private static Planet planet;
-	private static ArrayList<UserAccount> accounts;
+public class Game implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private GameScreen screen;
+	private UserAccount userAccount;
+	private Player player;
+	private Universe universe;
+	private Planet planet;
+	private ArrayList<UserAccount> accounts;
 
 	/**
 	 * Creates an instance of the game.
@@ -22,7 +27,7 @@ public class Game {
 	 *            screen The screen of the game.
 	 */
 	public Game(GameScreen screen) {
-		Game.screen = screen;
+		this.screen = screen;
 		accounts = new ArrayList<UserAccount>();
 	}
 
@@ -32,7 +37,7 @@ public class Game {
 	 * @param UserAccount
 	 *            acc The user account to be added.
 	 */
-	public static void addAccount(UserAccount acc) {
+	public void addAccount(UserAccount acc) {
 		accounts.add(acc);
 	}
 
@@ -42,14 +47,14 @@ public class Game {
 	 * @param UserAccount
 	 *            acc The account to be checked.
 	 */
-	public static boolean checkAccount(UserAccount acc) {
+	public boolean checkAccount(UserAccount acc) {
 		return accounts.contains(acc);
 	}
 
 	/**
 	 * Debugging method that prints out all the accounts in the game.
 	 */
-	public static void printAccounts() {
+	public void printAccounts() {
 		for (UserAccount ua : accounts)
 			System.out.println(ua);
 	}
@@ -59,7 +64,7 @@ public class Game {
 	 * 
 	 * @return GameScreen screen The game's screen.
 	 */
-	public static GameScreen getScreen() {
+	public GameScreen getScreen() {
 		return screen;
 	}
 
@@ -69,8 +74,8 @@ public class Game {
 	 * @param UserAccount
 	 *            userAccount The user account that is to be set.
 	 */
-	public static void setUserAccount(UserAccount userAccount) {
-		Game.userAccount = userAccount;
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 	/**
@@ -78,7 +83,7 @@ public class Game {
 	 * 
 	 * @return UserAccount The current user account.
 	 */
-	public static UserAccount getUserAccount() {
+	public UserAccount getUserAccount() {
 		return userAccount;
 	}
 
@@ -88,8 +93,8 @@ public class Game {
 	 * @param Player
 	 *            player The player to be set.
 	 */
-	public static void setPlayer(Player player) {
-		Game.player = player;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	/**
@@ -97,7 +102,7 @@ public class Game {
 	 * 
 	 * @return Player player The current player.
 	 */
-	public static Player getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 
@@ -107,8 +112,8 @@ public class Game {
 	 * @param Universe
 	 *            universe The universe to be set.
 	 */
-	public static void setUniverse(Universe universe) {
-		Game.universe = universe;
+	public void setUniverse(Universe universe) {
+		this.universe = universe;
 	}
 
 	/**
@@ -116,7 +121,7 @@ public class Game {
 	 * 
 	 * @return Universe universe The current universe.
 	 */
-	public static Universe getUniverse() {
+	public Universe getUniverse() {
 		return universe;
 	}
 
@@ -126,8 +131,8 @@ public class Game {
 	 * @param Planet
 	 *            planet The planet to be set.
 	 */
-	public static void setPlanet(Planet planet) {
-		Game.planet = planet;
+	public void setPlanet(Planet planet) {
+		this.planet = planet;
 	}
 
 	/**
@@ -135,14 +140,14 @@ public class Game {
 	 * 
 	 * @return Planet planet The current planet.
 	 */
-	public static Planet getPlanet() {
+	public Planet getPlanet() {
 		return planet;
 	}
 
 	/**
 	 * Debugging method that allows the game to skip a few scenes.
 	 */
-	public static void skip() {
+	public void skip() {
 		setUserAccount(new UserAccount("User", "Pass"));
 		setPlayer(new Player("Name", 4, 4, 4, 4));
 		setUniverse(new Universe(screen));
