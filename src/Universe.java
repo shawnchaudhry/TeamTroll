@@ -169,7 +169,6 @@ public class Universe implements Scene, Serializable {
 					fuelText.setText("Not enough Fuel");
 			}
 		});
-
 	}
 
 	/**

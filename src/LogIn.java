@@ -1,5 +1,7 @@
 import java.awt.event.*;
 import java.awt.*;
+import java.io.Serializable;
+
 import javax.swing.*;
 
 /**
@@ -8,7 +10,7 @@ import javax.swing.*;
  * @author TeamTroll
  * @version 1.0
  */
-public class LogIn implements Scene {
+public class LogIn implements Scene, Serializable {
 	private JLabel titleLabel, userLabel, passLabel, outputLabel;
 	private JTextField userText, passText;
 	private JButton loginButton, newAccButton, skipAheadButton;
