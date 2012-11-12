@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Scene to display the planets of the universe. Also represents actual planet
@@ -16,14 +17,21 @@ public class Planet implements Scene, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private GameScreen screen;
-	private String name, tech, res, pol;
+	private String name, tech, /*res,*/ pol;
 	private ImageIcon img;
 	private Point loc;
-	private JLabel planetNameLabel, planetTechLabel, planetResLabel,
+	private JLabel planetNameLabel, planetTechLabel, planetSpecialEventLabel,
 			planetPolLabel;
 	private JButton marketButton, universeButton;
 	private Market market;
 	private Rectangle planetRect;
+	
+	private Random rand = new Random();
+	private String specialEvent;
+	private String []  allEvents = {  "DROUGHT" , "ALLGOOD" ,  "COLD" , "CROPFAIL", "WAR", "BOREDOM", "WAR","PLAGUE"
+			,"LACKOFWORKERS",  "BOREDOM", "LACKOFWORKERS"};
+
+	
 
 	/**
 	 * Creates the create player scene. GameScreen screen
@@ -46,31 +54,33 @@ public class Planet implements Scene, Serializable {
 	 */
 	public Planet(final GameScreen screen, String name, Point loc, String tech,
 			String res, String pol, String filename) {
+		
+		specialEvent = allEvents[rand.nextInt(allEvents.length)];
+		
 		this.screen = screen;
 		this.name = name;
 		this.loc = loc;
 		this.tech = tech;
-		this.res = res;
+//		this.res = res;
 		this.pol = pol;
 		img = new ImageIcon(filename);
-
 		market = new Market(screen, this);
 		planetRect = new Rectangle(loc, new Dimension(img.getIconWidth(),
 				img.getIconHeight()));
 		planetNameLabel = new JLabel("Planet Name: " + name, JLabel.CENTER);
 		planetTechLabel = new JLabel("Planet Tech Level: " + tech,
 				JLabel.CENTER);
-		planetResLabel = new JLabel("Planet Resourses: " + res, JLabel.CENTER);
+		planetSpecialEventLabel = new JLabel("Planet Resourses: " + specialEvent, JLabel.CENTER);
 		planetPolLabel = new JLabel("Planet Politics: " + pol, JLabel.CENTER);
 
 		planetNameLabel.setPreferredSize(new Dimension(518, 50));
 		planetTechLabel.setPreferredSize(new Dimension(518, 50));
-		planetResLabel.setPreferredSize(new Dimension(518, 50));
+		planetSpecialEventLabel.setPreferredSize(new Dimension(518, 50));
 		planetPolLabel.setPreferredSize(new Dimension(518, 50));
 
 		marketButton = new JButton("Market");
 		universeButton = new JButton("Universe");
-
+		
 		marketButton.addActionListener(new ActionListener() {
 			/**
 			 * Goes to the market.
@@ -120,10 +130,9 @@ public class Planet implements Scene, Serializable {
 	 */
 	public void paint(JPanel p, Graphics g) {
 		p.removeAll();
-
 		p.add(planetNameLabel);
 		p.add(planetTechLabel);
-		p.add(planetResLabel);
+		p.add(planetSpecialEventLabel);
 		p.add(planetPolLabel);
 		p.add(marketButton);
 		p.add(universeButton);
@@ -189,9 +198,9 @@ public class Planet implements Scene, Serializable {
 	 * 
 	 * @return String The planet's resource type.
 	 */
-	public String getRes() {
-		return res;
-	}
+//	public String getRes() {
+//		return res;
+//	}
 
 	/**
 	 * Getter for the planet's political system type.
@@ -218,5 +227,9 @@ public class Planet implements Scene, Serializable {
 	 */
 	public Rectangle getRect() {
 		return planetRect;
+	}
+	
+	public String getSpecialEvent(){
+		return specialEvent;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.*;
 // I basically made it so that a few of the references for Game.whatever was changed to
 // screen.game.whatever. Im sorry if this isn't how you planned for it to work but I 
 // couldn't think of anything better. Let me know if you want me to change it.
+
 /**
  * Scene to let user visit the planet's market.
  * 
@@ -28,7 +29,6 @@ public class Market implements Scene, Serializable {
 	private Transaction trans;
 	private JRadioButton buyRadio, sellRadio;
 	private ButtonGroup buttonGroup;
-
 	/**
 	 * Creates the market scene.
 	 * 
@@ -38,6 +38,7 @@ public class Market implements Scene, Serializable {
 	 *            planet THe current planet.
 	 */
 	public Market(final GameScreen screen, Planet planet) {
+		
 		this.screen = screen;
 		this.planet = planet;
 		this.player = screen.game.getPlayer();
@@ -161,25 +162,46 @@ public class Market implements Scene, Serializable {
 
 		// fix this
 		buyGoods[0] = new Good(planet, this, trans, "Water", 0, 0, 2, 30, 3, 4,
-				30, 50);
+				30, 50, "DROUGHT".equals(planet.getSpecialEvent()));
 		buyGoods[1] = new Good(planet, this, trans, "Furs", 0, 0, 0, 250, 10,
-				10, 230, 280);
+				10, 230, 280,"COLD".equals(planet.getSpecialEvent()));
 		buyGoods[2] = new Good(planet, this, trans, "Food", 1, 0, 1, 100, 5, 5,
-				90, 160);
+				90, 160,"CROPFAIL".equals(planet.getSpecialEvent()));
 		buyGoods[3] = new Good(planet, this, trans, "Ore", 2, 2, 3, 350, 20,
-				10, 350, 420);
+				10, 350, 420,"WAR".equals(planet.getSpecialEvent()));
 		buyGoods[4] = new Good(planet, this, trans, "Games", 3, 1, 6, 250, -10,
-				5, 160, 270);
+				5, 160, 270,"BOREDOM".equals(planet.getSpecialEvent()));
 		buyGoods[5] = new Good(planet, this, trans, "Firearms", 3, 1, 5, 1250,
-				-75, 100, 600, 1100);
+				-75, 100, 600, 1100,"WAR".equals(planet.getSpecialEvent()));
 		buyGoods[6] = new Good(planet, this, trans, "Medicine", 4, 1, 6, 650,
-				-20, 10, 400, 700);
+				-20, 10, 400, 700,"PLAGUE".equals(planet.getSpecialEvent()));
 		buyGoods[7] = new Good(planet, this, trans, "Machines", 4, 3, 5, 900,
-				-30, 5, 600, 800);
+				-30, 5, 600, 800,"LACKOFWORKERS".equals(planet.getSpecialEvent()));
 		buyGoods[8] = new Good(planet, this, trans, "Narcotics", 5, 0, 5, 3500,
-				-125, 150, 2000, 3000);
+				-125, 150, 2000, 3000,"BOREDOM".equals(planet.getSpecialEvent()));
 		buyGoods[9] = new Good(planet, this, trans, "Robots", 6, 4, 7, 5000,
-				-150, 100, 3500, 5000);
+				-150, 100, 3500, 5000,"LACKOFWORKERS".equals(planet.getSpecialEvent()));
+
+//		buyGoods[0] = new Good(planet, this, trans, "Water", 0, 0, 2, 30, 3, 4,
+//				30, 50,true);
+//		buyGoods[1] = new Good(planet, this, trans, "Furs", 0, 0, 0, 250, 10,
+//				10, 230, 280,true);
+//		buyGoods[2] = new Good(planet, this, trans, "Food", 1, 0, 1, 100, 5, 5,
+//				90, 160,true);
+//		buyGoods[3] = new Good(planet, this, trans, "Ore", 2, 2, 3, 350, 20,
+//				10, 350, 420,true);
+//		buyGoods[4] = new Good(planet, this, trans, "Games", 3, 1, 6, 250, -10,
+//				5, 160, 270,true);
+//		buyGoods[5] = new Good(planet, this, trans, "Firearms", 3, 1, 5, 1250,
+//				-75, 100, 600, 1100,true);
+//		buyGoods[6] = new Good(planet, this, trans, "Medicine", 4, 1, 6, 650,
+//				-20, 10, 400, 700,true);
+//		buyGoods[7] = new Good(planet, this, trans, "Machines", 4, 3, 5, 900,
+//				-30, 5, 600, 800,true);
+//		buyGoods[8] = new Good(planet, this, trans, "Narcotics", 5, 0, 5, 3500,
+//				-125, 150, 2000, 3000,true);
+//		buyGoods[9] = new Good(planet, this, trans, "Robots", 6, 4, 7, 5000,
+//				-150, 100, 3500, 5000,true);
 
 		if (level < 6)
 			buyGoods[9].disable();
@@ -211,25 +233,25 @@ public class Market implements Scene, Serializable {
 		Good[] sellGoods = new Good[10];
 
 		sellGoods[0] = new Good(planet, this, trans, "Water", 0, 0, 2, 30, 3,
-				4, 30, 50);
+				4, 30, 50,"DROUGHT".equals(planet.getSpecialEvent()));
 		sellGoods[1] = new Good(planet, this, trans, "Furs", 0, 0, 0, 250, 10,
-				10, 230, 280);
+				10, 230, 280,"COLD".equals(planet.getSpecialEvent()));
 		sellGoods[2] = new Good(planet, this, trans, "Food", 1, 0, 1, 100, 5,
-				5, 90, 160);
+				5, 90, 160,"CROPFAIL".equals(planet.getSpecialEvent()));
 		sellGoods[3] = new Good(planet, this, trans, "Ore", 2, 2, 3, 350, 20,
-				10, 350, 420);
+				10, 350, 420,"WAR".equals(planet.getSpecialEvent()));
 		sellGoods[4] = new Good(planet, this, trans, "Games", 3, 1, 6, 250,
-				-10, 5, 160, 270);
+				-10, 5, 160, 270,"BOREDOM".equals(planet.getSpecialEvent()));
 		sellGoods[5] = new Good(planet, this, trans, "Firearms", 3, 1, 5, 1250,
-				-75, 100, 600, 1100);
+				-75, 100, 600, 1100,"WAR".equals(planet.getSpecialEvent()));
 		sellGoods[6] = new Good(planet, this, trans, "Medicine", 4, 1, 6, 650,
-				-20, 10, 400, 700);
+				-20, 10, 400, 700,"PLAGUE".equals(planet.getSpecialEvent()));
 		sellGoods[7] = new Good(planet, this, trans, "Machines", 4, 3, 5, 900,
-				-30, 5, 600, 800);
+				-30, 5, 600, 800,"LACKOFWORKERS".equals(planet.getSpecialEvent()));
 		sellGoods[8] = new Good(planet, this, trans, "Narcotics", 5, 0, 5,
-				3500, -125, 150, 2000, 3000);
+				3500, -125, 150, 2000, 3000,"BOREDOM".equals(planet.getSpecialEvent()));
 		sellGoods[9] = new Good(planet, this, trans, "Robots", 6, 4, 7, 5000,
-				-150, 100, 3500, 5000);
+				-150, 100, 3500, 5000,"LACKOFWORKERS".equals(planet.getSpecialEvent()));
 
 		if (level < 4)
 			sellGoods[9].disable();
