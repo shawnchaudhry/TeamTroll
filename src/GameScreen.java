@@ -11,11 +11,13 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class GameScreen extends JPanel {
 	private Scene scene;
-	
-	// Sorry Hannah :( I had to define it. It was the only way I could think of saving and loading
-	// the game with the game object. Unfortunately, Game had a lot of static stuff going on and it couldn't
+
+	// Sorry Hannah :( I had to define it. It was the only way I could think of
+	// saving and loading
+	// the game with the game object. Unfortunately, Game had a lot of static
+	// stuff going on and it couldn't
 	// be serialized properly and loaded properly.
-	
+
 	public Game game;
 
 	/**

@@ -161,12 +161,16 @@ public class Universe implements Scene, Serializable {
 			 */
 			public void actionPerformed(ActionEvent e) {
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
-				if (destPlanet != null && cost <= ship.getFuel()) {
-					ship.decreaseFuel(cost);
-					planet = destPlanet;
-					refresh();
-				} else
-					fuelText.setText("Not enough Fuel");
+				if (rand.nextInt(5) == 0) {
+					new RandomEvents(player);
+				} else {
+					if (destPlanet != null && cost <= ship.getFuel()) {
+						ship.decreaseFuel(cost);
+						planet = destPlanet;
+						refresh();
+					} else
+						fuelText.setText("Not enough Fuel");
+				}
 			}
 		});
 	}

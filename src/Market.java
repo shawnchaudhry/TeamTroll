@@ -6,6 +6,7 @@ import java.util.*;
 // I basically made it so that a few of the references for Game.whatever was changed to
 // screen.game.whatever. Im sorry if this isn't how you planned for it to work but I 
 // couldn't think of anything better. Let me know if you want me to change it.
+
 /**
  * Scene to let user visit the planet's market.
  * 

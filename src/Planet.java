@@ -91,7 +91,7 @@ public class Planet implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				//Set to screen.game.getUniverse();
+				// Set to screen.game.getUniverse();
 				screen.setScene(screen.game.getUniverse());
 			}
 		});

@@ -99,7 +99,7 @@ public class Driver {
 				int returnVal = fc.showOpenDialog(frame);
 				File file = fc.getSelectedFile();
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					
+
 					try {
 						ObjectInputStream inputFile = new ObjectInputStream(
 								new FileInputStream(file));
@@ -114,7 +114,8 @@ public class Driver {
 						e.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(frame, "Did not load a game.");
+					JOptionPane
+							.showMessageDialog(frame, "Did not load a game.");
 				}
 			}
 		});
