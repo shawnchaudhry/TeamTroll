@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.*;
 import java.awt.event.*;
@@ -148,6 +149,13 @@ public class Universe implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
+				
+				if(!planet.getSpecialEvent().equals("ALLGOOD"))
+					JOptionPane.showMessageDialog(screen,
+							"This Planet suffers from " + planet.getSpecialEvent(),
+						    "Special Event",
+						    JOptionPane.WARNING_MESSAGE);
+				
 				screen.setScene(planet);
 			}
 		});
@@ -160,6 +168,7 @@ public class Universe implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
+				
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
 				if (rand.nextInt(5) == 0) {
 					new RandomEvents(player);

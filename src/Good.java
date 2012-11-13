@@ -20,6 +20,7 @@ public class Good extends JPanel {
 	private int price, quantity;
 
 	private final int MTLP, MTLU, TTP, BP, IPL, VAR, MTL, MTH;
+	private boolean IE;
 
 	/**
 	 * Creates the Good.
@@ -40,10 +41,13 @@ public class Good extends JPanel {
 	 * @param int VAR The variance in price of the good.
 	 * @param int MTL
 	 * @param int MTH
+	 * IE	CR	ER
 	 */
 	public Good(Planet planet, final Market market, final Transaction trans,
 			final String name, int MTLP, int MTLU, int TTP, int BP, int IPL,
-			int VAR, int MTL, int MTH) {
+			int VAR, int MTL, int MTH, 
+			boolean IE) {
+		
 		this.planet = planet;
 		this.setTrans(trans);
 
@@ -56,7 +60,8 @@ public class Good extends JPanel {
 		this.VAR = VAR;
 		this.MTL = MTL;
 		this.MTH = MTH;
-
+		this.IE = IE;
+		
 		nameLabel = new JLabel(name);
 
 		quantity = 0;
@@ -116,8 +121,13 @@ public class Good extends JPanel {
 	 * passed into the class.
 	 */
 	private int price() {
-		return (BP + (IPL * (planet.getTechLevel() - MTLP)) + (rand
+		int goodPrice = (BP + (IPL * (planet.getTechLevel() - MTLP)) + (rand
 				.nextInt(2 * VAR - 1) - VAR));
+		if(IE){
+			goodPrice *= (rand.nextInt(5)+10);
+			
+		}
+		return goodPrice;
 	}
 
 	/**
