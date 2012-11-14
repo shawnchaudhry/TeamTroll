@@ -154,5 +154,7 @@ public class Game implements Serializable {
 		setUniverse(new Universe(screen));
 		screen.setScene(universe);
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }

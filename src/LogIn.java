@@ -127,5 +127,7 @@ public class LogIn implements Scene, Serializable {
 
 		p.revalidate();
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }

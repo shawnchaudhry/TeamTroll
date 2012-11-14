@@ -240,4 +240,8 @@ public class Planet implements Scene, Serializable {
 	public String getSpecialEvent(){
 		return specialEvent;
 	}
+	
+	public String toString(){
+		return super.toString();
+	}
 }
