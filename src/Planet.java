@@ -23,7 +23,6 @@ public class Planet implements Scene, Serializable {
 	private JLabel planetNameLabel, planetTechLabel, planetSpecialEventLabel,
 			planetPolLabel;
 	private JButton marketButton, universeButton;
-	private Market market;
 	private Rectangle planetRect;
 	
 	private Random rand = new Random();
@@ -64,7 +63,7 @@ public class Planet implements Scene, Serializable {
 //		this.res = res;
 		this.pol = pol;
 		img = new ImageIcon(filename);
-		market = new Market(screen, this);
+	
 		planetRect = new Rectangle(loc, new Dimension(img.getIconWidth(),
 				img.getIconHeight()));
 		planetNameLabel = new JLabel("Planet Name: " + name, JLabel.CENTER);
@@ -89,7 +88,7 @@ public class Planet implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				screen.setScene(market);
+				screen.setScene(new Market(screen));
 			}
 		});
 

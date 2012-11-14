@@ -24,7 +24,6 @@ public class Universe implements Scene, Serializable {
 	private JButton landButton, travelButton;
 	private Planet planet, destPlanet;
 	private Random rand;
-	private Player player;
 	private Ship ship;
 	private String[] namesArr = { "Acamar", "Adahn", "Aldea", "Andevian",
 			"Antedi", "Balosnee", "Baratas", "Brax", "Bretel", "Calondia",
@@ -129,8 +128,7 @@ public class Universe implements Scene, Serializable {
 		screen.game.setUniverse(this);
 
 		// Changed to screen.game.getPlayer();
-		player = screen.game.getPlayer();
-		ship = player.getShip();
+		ship = screen.game.getPlayer().getShip();
 		currentPlanetText = new JTextField("Current Planet: "
 				+ planet.getName(), 25);
 		destPlanetText = new JTextField("Destination Planet: "
@@ -151,10 +149,8 @@ public class Universe implements Scene, Serializable {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(!planet.getSpecialEvent().equals("ALLGOOD"))
-					JOptionPane.showMessageDialog(screen,
-							"This Planet suffers from " + planet.getSpecialEvent(),
-						    "Special Event",
-						    JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(screen, "This Planet suffers from " + planet.getSpecialEvent(),
+						    "Special Event", JOptionPane.WARNING_MESSAGE);
 				
 				screen.setScene(planet);
 			}
@@ -168,10 +164,9 @@ public class Universe implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
 				if (rand.nextInt(5) == 0) {
-					new RandomEvents(player);
+					new RandomEvents(screen.game.getPlayer());
 				}
 				if (destPlanet != null && cost <= ship.getFuel()) {
 					ship.decreaseFuel(cost);
@@ -271,7 +266,7 @@ public class Universe implements Scene, Serializable {
 
 		fuel = (35 + rand.nextInt(30)) % 65;
 
-		fuelText.setText("Fuel: " + player.getShip().getFuel() + " Fuel Cost: "
+		fuelText.setText("Fuel: " + screen.game.getPlayer().getShip().getFuel() + " Fuel Cost: "
 				+ fuel);
 
 		return fuel;
