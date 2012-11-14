@@ -91,8 +91,8 @@ public class CreatePlayer implements Scene {
 	 * Helper class to allocate skill points.
 	 */
 	private class StatListener implements ActionListener {
-		int stat;
-		int delta;
+		private int stat;
+		private int delta;
 
 		/**
 		 * Creates a new listener for the stat buttons.
