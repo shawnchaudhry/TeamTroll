@@ -11,9 +11,9 @@ import javax.swing.*;
  * @version 1.0
  */
 public class LogIn implements Scene, Serializable {
-	private JLabel titleLabel, userLabel, passLabel, outputLabel;
-	private JTextField userText, passText;
-	private JButton loginButton, newAccButton, skipAheadButton;
+	private final JLabel titleLabel, userLabel, passLabel, outputLabel;
+	private final JTextField userText, passText;
+	private final JButton loginButton, newAccButton, skipAheadButton;
 	private GameScreen screen;
 
 	/**
@@ -79,8 +79,8 @@ public class LogIn implements Scene, Serializable {
 	 * Otherwise, goes to the universe screen.
 	 */
 	public void login() {
-		String userInput = userText.getText();
-		String passInput = passText.getText();
+		final String userInput = userText.getText();
+		final String passInput = passText.getText();
 		// So I rewrote the Game.checkAccount, Game.getPlayer, etc. to
 		// screen.game.checkAccount etc.
 		// I really thought it'd be easier to access the information this way

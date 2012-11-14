@@ -10,9 +10,9 @@ import java.awt.*;
  */
 public class CreateAccount implements Scene {
 	private GameScreen screen;
-	private JTextField userText, passText, repassText;
-	private JLabel userLabel, passLabel, repassLabel, outputLabel;
-	private JButton createButton, backButton;
+	final private JTextField userText, passText, repassText;
+	final private JLabel userLabel, passLabel, repassLabel, outputLabel;
+	final private JButton createButton, backButton;
 
 	/**
 	 * Creates the create account scene.
@@ -63,9 +63,9 @@ public class CreateAccount implements Scene {
 	 * Creates the user account with the text entered in the fields.
 	 */
 	public void createAccount() {
-		String user = userText.getText();
-		String pass = passText.getText();
-		String repass = repassText.getText();
+		final String user = userText.getText();
+		final String pass = passText.getText();
+		final String repass = repassText.getText();
 
 		if (user.length() == 0)
 			outputLabel.setText("Must enter a username.");

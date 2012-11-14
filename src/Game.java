@@ -18,7 +18,7 @@ public class Game implements Serializable {
 	private Player player;
 	private Universe universe;
 	private Planet planet;
-	private ArrayList<UserAccount> accounts;
+	private final ArrayList<UserAccount> accounts;
 
 	/**
 	 * Creates an instance of the game.

@@ -11,7 +11,7 @@ import java.util.*;
  */
 @SuppressWarnings("serial")
 public class Transaction extends JPanel {
-	private JLabel transLabel;
+	private final JLabel transLabel;
 	private Player player;
 	private Market market;
 	private int balance, change;
@@ -131,7 +131,7 @@ public class Transaction extends JPanel {
 	 * @return Transaction The results of the transaction.
 	 */
 	public Transaction confirm() {
-		Hashtable<String, Integer> playerInventory = player.getInventory();
+		final Hashtable<String, Integer> playerInventory = player.getInventory();
 
 		for (String good : trans.keySet())
 			playerInventory.put(good,

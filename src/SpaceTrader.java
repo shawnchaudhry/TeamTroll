@@ -14,7 +14,7 @@ public class SpaceTrader extends JFrame {
 
 	// This method now sets up the driver object and then calls the run method.
 	public static void main(String[] args) {
-		Driver driver = new Driver();
+		final Driver driver = new Driver();
 		driver.run();
 	}
 }

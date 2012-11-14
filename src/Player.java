@@ -13,7 +13,7 @@ public class Player implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name, inventoryString;
-	private int fight, trade, engin, pilot, money, cargoBay;
+	final private int fight, trade, engin, pilot, money, cargoBay;
 	private Hashtable<String, Integer> inventory;
 	private Ship ship;
 
@@ -177,7 +177,7 @@ public class Player implements Serializable {
 	 */
 	public String getInventory1() {
 		generateInventoryString();
-		int split = inventoryString.indexOf("Furs");
+		final int split = inventoryString.indexOf("Furs");
 		return inventoryString.substring(0, split);
 	}
 
@@ -190,7 +190,7 @@ public class Player implements Serializable {
 	 */
 	public String getInventory2() {
 		generateInventoryString();
-		int split = inventoryString.indexOf("Furs");
+		final int split = inventoryString.indexOf("Furs");
 		return "| "
 				+ inventoryString.substring(split, inventoryString.length());
 	}

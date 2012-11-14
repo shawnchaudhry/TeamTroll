@@ -68,11 +68,11 @@ public class Driver {
 		// Universe, and UserAccount.
 		saveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int returnVal = fc.showSaveDialog(frame);
+				final int returnVal = fc.showSaveDialog(frame);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
-						File file = fc.getSelectedFile();
-						ObjectOutputStream outputFile = new ObjectOutputStream(
+						final File file = fc.getSelectedFile();
+						final ObjectOutputStream outputFile = new ObjectOutputStream(
 								new FileOutputStream(file));
 						outputFile.writeObject(gameScreen.game);
 						outputFile.close();
@@ -96,12 +96,12 @@ public class Driver {
 		// method.
 		loadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int returnVal = fc.showOpenDialog(frame);
-				File file = fc.getSelectedFile();
+				final int returnVal = fc.showOpenDialog(frame);
+				final File file = fc.getSelectedFile();
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 
 					try {
-						ObjectInputStream inputFile = new ObjectInputStream(
+						final ObjectInputStream inputFile = new ObjectInputStream(
 								new FileInputStream(file));
 						gameScreen.game = (Game) inputFile.readObject();
 						gameScreen = gameScreen.game.getScreen();
