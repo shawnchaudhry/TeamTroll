@@ -42,8 +42,7 @@ public class CreateAccount implements Scene {
 			/**
 			 * Creates a new account.
 			 * 
-			 * @param ActionEvent
-			 *            e The created action event.
+			 * @param ActionEvent e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
 				createAccount();
