@@ -1,8 +1,13 @@
-import java.awt.event.*;
-import java.awt.*;
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Scene to let user log into game.
@@ -122,5 +127,7 @@ public class LogIn implements Scene, Serializable {
 
 		p.revalidate();
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }

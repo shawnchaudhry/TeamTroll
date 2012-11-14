@@ -62,4 +62,8 @@ public class Ship implements Serializable {
 	public int getCargoBay() {
 		return cargoBay;
 	}
+	
+	public String toString(){
+		return super.toString();
+	}
 }

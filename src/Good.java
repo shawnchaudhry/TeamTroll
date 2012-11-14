@@ -1,7 +1,13 @@
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-import java.util.*;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
 
 /**
  * Represents a Good that is traded in the game.

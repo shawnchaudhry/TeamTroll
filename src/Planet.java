@@ -1,8 +1,16 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Scene to display the planets of the universe. Also represents actual planet
@@ -230,5 +238,9 @@ public class Planet implements Scene, Serializable {
 	
 	public String getSpecialEvent(){
 		return specialEvent;
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }

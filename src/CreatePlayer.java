@@ -1,6 +1,11 @@
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Scene to let user make a player.
@@ -91,8 +96,8 @@ public class CreatePlayer implements Scene {
 	 * Helper class to allocate skill points.
 	 */
 	private class StatListener implements ActionListener {
-		int stat;
-		int delta;
+		private int stat;
+		private int delta;
 
 		/**
 		 * Creates a new listener for the stat buttons.
@@ -146,7 +151,9 @@ public class CreatePlayer implements Scene {
 				}
 			}
 		}
-
+		public String toString(){
+			return super.toString();
+		}
 	}
 
 	/**
@@ -186,7 +193,8 @@ public class CreatePlayer implements Scene {
 		p.add(outputLabel);
 
 		p.revalidate();
-
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }

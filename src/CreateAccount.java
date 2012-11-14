@@ -1,6 +1,12 @@
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Scene to let user make an account.
@@ -16,9 +22,8 @@ public class CreateAccount implements Scene {
 
 	/**
 	 * Creates the create account scene.
-	 * 
-	 * @param GameScreen
-	 *            screen The screen of the game.
+	 *
+	 * @param screen the screen
 	 */
 	public CreateAccount(final GameScreen screen) {
 		this.screen = screen;
@@ -105,5 +110,9 @@ public class CreateAccount implements Scene {
 		p.add(backButton);
 
 		p.revalidate();
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }

@@ -1,9 +1,17 @@
-import javax.swing.*;
-
-import java.awt.*;
-import java.util.*;
-import java.awt.event.*;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.Serializable;
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Scene to let the user travel to the universe.
@@ -106,7 +114,8 @@ public class Universe implements Scene, Serializable {
 
 		shipIcon = new ImageIcon(shipArr[0]);
 
-		planets = new Planet[numPlanets--];
+		planets = new Planet[numPlanets];
+		numPlanets=numPlanets-1;
 
 		for (int size = numPlanets; 0 <= size; size--) {
 			nameNum = rand.nextInt(nameLength);
@@ -116,9 +125,10 @@ public class Universe implements Scene, Serializable {
 					tech[rand.nextInt(tech.length)],
 					res[rand.nextInt(res.length)],
 					pol[rand.nextInt(pol.length)], filenames[fileNum]);
-
-			namesArr[nameNum] = namesArr[--nameLength];
-			filenames[fileNum] = filenames[--fileLength];
+			nameLength=nameLength-1;
+			fileLength=fileLength-1;
+			namesArr[nameNum] = namesArr[nameLength];
+			filenames[fileNum] = filenames[fileLength];
 		}
 
 		planet = planets[rand.nextInt(13)];
@@ -270,5 +280,9 @@ public class Universe implements Scene, Serializable {
 				+ fuel);
 
 		return fuel;
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }

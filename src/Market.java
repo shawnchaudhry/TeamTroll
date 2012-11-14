@@ -92,6 +92,10 @@ public class Market implements Scene, Serializable {
 			if (e.getSource() == planetButton)
 				screen.setScene(screen.game.getPlanet());
 		}
+		
+		public String toString(){
+			return super.toString();
+		}
 	}
 
 	/**
@@ -273,5 +277,9 @@ public class Market implements Scene, Serializable {
 	 */
 	public boolean buy() {
 		return buyRadio.isSelected();
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }
