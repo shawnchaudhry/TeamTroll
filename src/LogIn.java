@@ -15,9 +15,9 @@ import javax.swing.JTextField;
  * @version 1.0
  */
 public class LogIn implements Scene, Serializable {
-	private final JLabel titleLabel, userLabel, passLabel, outputLabel;
-	private final JTextField userText, passText;
-	private final JButton loginButton, newAccButton, skipAheadButton;
+	private JLabel titleLabel, userLabel, passLabel, outputLabel;
+	private JTextField userText, passText;
+	private JButton loginButton, newAccButton, skipAheadButton;
 	private GameScreen screen;
 
 	/**
@@ -82,20 +82,10 @@ public class LogIn implements Scene, Serializable {
 	 * Checks if login data is valid. If so, goes to the create player scene.
 	 * Otherwise, goes to the universe screen.
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public void login() {
-		final String userInput = userText.getText();
-		final String passInput = passText.getText();
-=======
-	public void loginUser() {
-=======
 	public boolean login() {
 		boolean loggingIn=false;
->>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 		String userInput = userText.getText();
 		String passInput = passText.getText();
->>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 		// So I rewrote the Game.checkAccount, Game.getPlayer, etc. to
 		// screen.game.checkAccount etc.
 		// I really thought it'd be easier to access the information this way
