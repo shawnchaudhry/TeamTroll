@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,7 +49,7 @@ public class LogIn implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				loginUser();
+				login();
 			}
 		});
 
@@ -84,11 +83,16 @@ public class LogIn implements Scene, Serializable {
 	 * Otherwise, goes to the universe screen.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public void login() {
 		final String userInput = userText.getText();
 		final String passInput = passText.getText();
 =======
 	public void loginUser() {
+=======
+	public boolean login() {
+		boolean loggingIn=false;
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 		String userInput = userText.getText();
 		String passInput = passText.getText();
 >>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
@@ -97,19 +101,30 @@ public class LogIn implements Scene, Serializable {
 		// I really thought it'd be easier to access the information this way
 		// especially after we store
 		// it.
-		if (userText.getText().length() == 0
-				&& passText.getText().length() == 0)
+		if (userInput.length() == 0
+				&& passInput.length() == 0){
 			outputLabel.setText("Enter account information");
+		}
 		else if (!screen.game
-				.checkAccount(new UserAccount(userInput, passInput)))
+				.checkAccount(new UserAccount(userInput, passInput))){
 			outputLabel.setText("Invalid Account");
+		}
 		else if (screen.game.getPlayer() == null) {
 			screen.game.setUserAccount(new UserAccount(userInput, passInput));
 			screen.setScene(new CreatePlayer(screen));
-		} else
+			loggingIn=true;
+		} else{
 			screen.setScene(screen.game.getUniverse());
+			loggingIn=true;
+		}
+		return loggingIn;
 	}
 
+	public void setFields(String user, String pass){
+		userText.setText(user);
+		passText.setText(pass);
+	}
+	
 	/**
 	 * Paints the components onto the screen.
 	 * 
