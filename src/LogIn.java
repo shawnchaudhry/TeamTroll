@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,7 +82,8 @@ public class LogIn implements Scene, Serializable {
 	 * Checks if login data is valid. If so, goes to the create player scene.
 	 * Otherwise, goes to the universe screen.
 	 */
-	public void login() {
+	public boolean login() {
+		boolean loggingIn=false;
 		String userInput = userText.getText();
 		String passInput = passText.getText();
 		// So I rewrote the Game.checkAccount, Game.getPlayer, etc. to
@@ -91,19 +91,30 @@ public class LogIn implements Scene, Serializable {
 		// I really thought it'd be easier to access the information this way
 		// especially after we store
 		// it.
-		if (userText.getText().length() == 0
-				&& passText.getText().length() == 0)
+		if (userInput.length() == 0
+				&& passInput.length() == 0){
 			outputLabel.setText("Enter account information");
+		}
 		else if (!screen.game
-				.checkAccount(new UserAccount(userInput, passInput)))
+				.checkAccount(new UserAccount(userInput, passInput))){
 			outputLabel.setText("Invalid Account");
+		}
 		else if (screen.game.getPlayer() == null) {
 			screen.game.setUserAccount(new UserAccount(userInput, passInput));
 			screen.setScene(new CreatePlayer(screen));
-		} else
+			loggingIn=true;
+		} else{
 			screen.setScene(screen.game.getUniverse());
+			loggingIn=true;
+		}
+		return loggingIn;
 	}
 
+	public void setFields(String user, String pass){
+		userText.setText(user);
+		passText.setText(pass);
+	}
+	
 	/**
 	 * Paints the components onto the screen.
 	 * 
