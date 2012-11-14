@@ -24,26 +24,15 @@ public class Universe implements Scene, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final ImageIcon background, shipIcon;
-	private final Planet[] planets;
+	private ImageIcon background, shipIcon;
+	private Planet[] planets;
 	private int numPlanets = 13;
-<<<<<<< HEAD
-	private final GameScreen screen;
-	private final JTextField currentPlanetText, destPlanetText, fuelText;
-	private final JButton landButton, travelButton;
-	private Planet planet, destPlanet;
-	private final Random rand;
-	private final Player player;
-	private final Ship ship;
-	private final String[] namesArr = { "Acamar", "Adahn", "Aldea", "Andevian",
-=======
 	private GameScreen screen;
 	private JTextField currentPlanetText, destPlanetText, fuelText;
 	private JButton landButton, travelButton;
 	private Planet destPlanet;
 	private Random rand;
 	private String[] namesArr = { "Acamar", "Adahn", "Aldea", "Andevian",
->>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 			"Antedi", "Balosnee", "Baratas", "Brax", "Bretel", "Calondia",
 			"Campor", "Capelle", "Carzon", "Castor", "Cestus", "Cheron",
 			"Courteney", "Daled", "Damast", "Davlos", "Deneb", "Deneva",
@@ -64,29 +53,29 @@ public class Universe implements Scene, Serializable {
 			"Vadera", "Vagra", "Vandor", "Ventax", "Xenon", "Xerxes", "Yew",
 			"Yojimbo", "Zalkon", "Zuul" };
 
-	private final String[] shipArr = { "img/spaceship1.png" };
+	private String[] shipArr = { "img/spaceship1.png" };
 
-	private final Point[] loc = { new Point(25, 135), new Point(155, 165),
+	private Point[] loc = { new Point(25, 135), new Point(155, 165),
 			new Point(275, 115), new Point(400, 125), new Point(120, 270),
 			new Point(355, 240), new Point(110, 410), new Point(240, 340),
 			new Point(320, 410), new Point(410, 440), new Point(40, 510),
 			new Point(370, 540), new Point(260, 560) };
 
-	private final String[] tech = { "Pre-Agriculture", "Medieval", "Renaissance",
+	private String[] tech = { "Pre-Agriculture", "Medieval", "Renaissance",
 			"Early Industrial", "Industrial", "Post-Industrial", "Hi-Tech" };
 
-	private final String[] res = { "NOSPECIALRESOURCES", "MINERALRICH",
+	private String[] res = { "NOSPECIALRESOURCES", "MINERALRICH",
 			"MINERALPOOR", "DESERT", "LOTSOFWATER", "RICHSOIL", "POORSOIL",
 			"RICHFAUNA", "LIFELESS", "WEIRDMUSHROOMS", " LOTSOFHERBS",
 			" ARTISTIC", " WARLIKE", "NOSPECIALRESOURCES",
 			"NOSPECIALRESOURCES", "NOSPECIALRESOURCES" };
 
-	private final String[] pol = { "Anarchy", "Capitalist State", "Communist State",
+	private String[] pol = { "Anarchy", "Capitalist State", "Communist State",
 			"Confederacy", "Corporate State", "Cybernetic State", "Democracy",
 			"Dictatorship", "Fascist State", "Feudal State", "Military State",
 			"Monarchy", "Pacifist State", "Socialist State", "State of Satori" };
 
-	private final String[] filenames = { "img/planet0.png", "img/planet1.png",
+	private String[] filenames = { "img/planet0.png", "img/planet1.png",
 			"img/planet2.png", "img/planet3.png", "img/planet4.png",
 			"img/planet5.png", "img/planet6.png", "img/planet7.png",
 			"img/planet8.png", "img/planet9.png", "img/planet10.png",
@@ -184,13 +173,8 @@ public class Universe implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				
-				final int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
-=======
 				Planet planet = screen.game.getPlanet();
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
->>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 				if (rand.nextInt(5) == 0) {
 					new RandomEvents(screen.game.getPlayer());
 				}
@@ -222,7 +206,7 @@ public class Universe implements Scene, Serializable {
 		for (Planet pl : planets)
 			pl.draw(p, g);
 
-		final Point currLoc = planet.getLoc();
+		Point currLoc = planet.getLoc();
 		shipIcon.paintIcon(null, g, currLoc.x, currLoc.y);
 
 		p.add(currentPlanetText);
