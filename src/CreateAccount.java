@@ -62,7 +62,8 @@ public class CreateAccount implements Scene {
 	/**
 	 * Creates the user account with the text entered in the fields.
 	 */
-	public void createAccount() {
+	public boolean createAccount() {
+		
 		final String user = userText.getText();
 		final String pass = passText.getText();
 		final String repass = repassText.getText();
@@ -76,10 +77,19 @@ public class CreateAccount implements Scene {
 		else {
 			screen.game.addAccount(new UserAccount(user, pass));
 			screen.setScene(new LogIn(screen));
+			return true;
 		}
-
+		return false;
 		// Database.printAccounts();
 	}
+	
+	public void setText(String user,String pass,String repass)
+	{
+		userText.setText(user);
+		passText.setText(pass);
+		repassText.setText(repass);
+	}
+	
 
 	/**
 	 * Paints the components onto the screen.
