@@ -276,4 +276,8 @@ public class Universe implements Scene, Serializable {
 
 		return fuel;
 	}
+	
+	public String toString(){
+		return super.toString();
+	}
 }

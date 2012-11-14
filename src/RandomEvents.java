@@ -82,5 +82,7 @@ public class RandomEvents {
 			}
 		}
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }

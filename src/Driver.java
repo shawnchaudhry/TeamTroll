@@ -130,4 +130,8 @@ public class Driver {
 		frame.setVisible(true);
 		frame.pack();
 	}
+	
+	public String toString(){
+		return super.toString();
+	}
 }

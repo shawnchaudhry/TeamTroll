@@ -252,5 +252,8 @@ public class Player implements Serializable {
 			System.out.println(good + ": " + inventory.get(good));
 		}
 	}
+	public String toString(){
+		return super.toString();
+	}
 
 }

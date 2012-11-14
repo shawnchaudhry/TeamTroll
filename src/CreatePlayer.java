@@ -146,7 +146,9 @@ public class CreatePlayer implements Scene {
 				}
 			}
 		}
-
+		public String toString(){
+			return super.toString();
+		}
 	}
 
 	/**
@@ -186,7 +188,8 @@ public class CreatePlayer implements Scene {
 		p.add(outputLabel);
 
 		p.revalidate();
-
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }
