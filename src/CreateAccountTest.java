@@ -23,16 +23,16 @@ public class CreateAccountTest {
 	public void testCreateAccount() {
 		CreateAccount acc=new CreateAccount(game.getScreen());
 		acc.setText("ilyssa","tennis","tennis");
-		boolean res1=acc.createAccount();
+		boolean res1=acc.createUserAccount();
 		assertTrue("wrong",res1);
 		acc.setText(null, null, null);
-		boolean res2=acc.createAccount();
+		boolean res2=acc.createUserAccount();
 		assertFalse("wrong",res2);
 		acc.setText("ilyssa","hi","HI");
-		boolean res3=acc.createAccount();
+		boolean res3=acc.createUserAccount();
 		assertFalse("wrong",res3);
 		acc.setText(null,"ilyssa","ilyssa");
-		boolean res4=acc.createAccount();
+		boolean res4=acc.createUserAccount();
 		assertFalse("wrong",res4);
 	}
 }

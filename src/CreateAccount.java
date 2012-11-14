@@ -66,7 +66,7 @@ public class CreateAccount implements Scene {
 	/**
 	 * Creates the user account with the text entered in the fields.
 	 */
-	public void createUserAccount() {
+	public boolean createUserAccount() {
 		String user = userText.getText();
 		String pass = passText.getText();
 		String repass = repassText.getText();
@@ -80,8 +80,9 @@ public class CreateAccount implements Scene {
 		else {
 			screen.game.addAccount(new UserAccount(user, pass));
 			screen.setScene(new LogIn(screen));
+			return true;
 		}
-
+		return false;
 		// Database.printAccounts();
 	}
 
@@ -113,5 +114,12 @@ public class CreateAccount implements Scene {
 	
 	public String toString(){
 		return super.toString();
+	}
+
+	public void setText(String string, String string2, String string3) {
+		// TODO Auto-generated method stub
+		userText.setText(string);
+		passText.setText(string2);
+		repassText.setText(string3);
 	}
 }
