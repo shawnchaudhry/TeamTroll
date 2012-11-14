@@ -30,10 +30,8 @@ public class Universe implements Scene, Serializable {
 	private GameScreen screen;
 	private JTextField currentPlanetText, destPlanetText, fuelText;
 	private JButton landButton, travelButton;
-	private Planet planet, destPlanet;
+	private Planet destPlanet;
 	private Random rand;
-	private Player player;
-	private Ship ship;
 	private String[] namesArr = { "Acamar", "Adahn", "Aldea", "Andevian",
 			"Antedi", "Balosnee", "Baratas", "Brax", "Bretel", "Calondia",
 			"Campor", "Capelle", "Carzon", "Castor", "Cestus", "Cheron",
@@ -109,6 +107,7 @@ public class Universe implements Scene, Serializable {
 	public Universe(final GameScreen screen) {
 		this.screen = screen;
 		rand = new Random();
+		final Ship ship = screen.game.getPlayer().getShip();
 
 		background = new ImageIcon("img/spacebackground.png");
 		int nameLength = namesArr.length, fileLength = filenames.length, nameNum, fileNum;
@@ -132,15 +131,13 @@ public class Universe implements Scene, Serializable {
 			filenames[fileNum] = filenames[fileLength];
 		}
 
-		planet = planets[rand.nextInt(13)];
 		// set to screen.game.setPlanet(planet)
 		// and screen.game.setUniverse(this).
+		final Planet planet = planets[rand.nextInt(13)];
 		screen.game.setPlanet(planet);
 		screen.game.setUniverse(this);
 
 		// Changed to screen.game.getPlayer();
-		player = screen.game.getPlayer();
-		ship = player.getShip();
 		currentPlanetText = new JTextField("Current Planet: "
 				+ planet.getName(), 25);
 		destPlanetText = new JTextField("Destination Planet: "
@@ -161,10 +158,8 @@ public class Universe implements Scene, Serializable {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(!planet.getSpecialEvent().equals("ALLGOOD"))
-					JOptionPane.showMessageDialog(screen,
-							"This Planet suffers from " + planet.getSpecialEvent(),
-						    "Special Event",
-						    JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(screen, "This Planet suffers from " + planet.getSpecialEvent(),
+						    "Special Event", JOptionPane.WARNING_MESSAGE);
 				
 				screen.setScene(planet);
 			}
@@ -178,14 +173,14 @@ public class Universe implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				
+				Planet planet = screen.game.getPlanet();
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
 				if (rand.nextInt(5) == 0) {
-					new RandomEvents(player);
+					new RandomEvents(screen.game.getPlayer());
 				}
 				if (destPlanet != null && cost <= ship.getFuel()) {
 					ship.decreaseFuel(cost);
-					planet = destPlanet;
+					screen.game.setPlanet(destPlanet);
 					refresh();
 				} else
 					fuelText.setText("Not enough Fuel");
@@ -202,12 +197,14 @@ public class Universe implements Scene, Serializable {
 	 *            g The graphics to the corresponding page.
 	 */
 	public void paint(JPanel p, Graphics g) {
+		final Planet planet = screen.game.getPlanet();
+		
 		p.removeAll();
 
 		background.paintIcon(null, g, 0, 0);
 
-		for (Planet planet : planets)
-			planet.draw(p, g);
+		for (Planet pl : planets)
+			pl.draw(p, g);
 
 		Point currLoc = planet.getLoc();
 		shipIcon.paintIcon(null, g, currLoc.x, currLoc.y);
@@ -224,8 +221,7 @@ public class Universe implements Scene, Serializable {
 					if (p.getRect().contains(e.getPoint())) {
 						travelButton.setEnabled(true);
 						destPlanet = p;
-						destPlanetText.setText("Destination Planet: "
-								+ p.getName());
+						destPlanetText.setText("Destination Planet: " + p.getName());
 						calcFuel(planet.getLoc(), destPlanet.getLoc());
 					}
 			}
@@ -241,19 +237,8 @@ public class Universe implements Scene, Serializable {
 	public void refresh() {
 		screen.setScene(this);
 		// Changed to screen.game.setPlanet(planet);
-		screen.game.setPlanet(planet);
-		currentPlanetText.setText("Current Planet: " + planet.getName());
-		fuelText.setText("Fuel: " + ship.getFuel() + " Fuel Cost: " + 0);
-	}
-
-	/**
-	 * returns a planet at index i
-	 * 
-	 * @param i
-	 * @return the planet at i
-	 */
-	public Planet getPlanet(int i) {
-		return planets[i];
+		currentPlanetText.setText("Current Planet: " + screen.game.getPlanet().getName());
+		fuelText.setText("Fuel: " + screen.game.getPlayer().getShip().getFuel() + " Fuel Cost: " + 0);
 	}
 
 	/**
@@ -281,7 +266,7 @@ public class Universe implements Scene, Serializable {
 
 		fuel = (35 + rand.nextInt(30)) % 65;
 
-		fuelText.setText("Fuel: " + player.getShip().getFuel() + " Fuel Cost: "
+		fuelText.setText("Fuel: " + screen.game.getPlayer().getShip().getFuel() + " Fuel Cost: "
 				+ fuel);
 
 		return fuel;

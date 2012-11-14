@@ -20,12 +20,10 @@ public class Market implements Scene, Serializable {
 	private static final long serialVersionUID = 1L;
 	private GameScreen screen;
 	private Planet planet;
-	private Player player;
 	private JButton planetButton, confirmButton;
 	private JLabel outputLabel, inventoryLabel1, inventoryLabel2, moneyLabel;
 	private int level, money;
 	private Good[] buyGoods, sellGoods;
-	private Hashtable<String, Integer> inventory;
 	private Transaction trans;
 	private JRadioButton buyRadio, sellRadio;
 	private ButtonGroup buttonGroup;
@@ -37,13 +35,11 @@ public class Market implements Scene, Serializable {
 	 * @param Planet
 	 *            planet THe current planet.
 	 */
-	public Market(final GameScreen screen, Planet planet) {
-		
+	public Market(final GameScreen screen) {
 		this.screen = screen;
-		this.planet = planet;
-		this.player = screen.game.getPlayer();
-		inventory = player.getInventory();
-		trans = new Transaction(player, this);
+		this.planet = screen.game.getPlanet();
+		trans = new Transaction(screen, this);
+		Player player = screen.game.getPlayer();
 
 		buyRadio = new JRadioButton("Buy", true);
 		sellRadio = new JRadioButton("Sell", false);
@@ -135,7 +131,7 @@ public class Market implements Scene, Serializable {
 	 */
 	private void refresh() {
 		// Set to screen.game.getPlayer();
-		player = screen.game.getPlayer();
+		Player player = screen.game.getPlayer();
 		inventoryLabel1.setText(player.getInventory1());
 		inventoryLabel2.setText(player.getInventory2());
 
