@@ -95,9 +95,7 @@ public class Game implements Serializable {
 	 *            player The player to be set.
 	 */
 	public void setPlayer(Player player) {
-		System.out.println("\nSetting player, inventory: ");
 		this.player = player;
-		player.printInventory();
 	}
 
 	/**
@@ -106,8 +104,6 @@ public class Game implements Serializable {
 	 * @return Player player The current player.
 	 */
 	public Player getPlayer() {
-		System.out.println("\nGetting player, inventory: ");
-		player.printInventory();
 		return player;
 	}
 
