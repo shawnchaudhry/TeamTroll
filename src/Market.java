@@ -20,12 +20,10 @@ public class Market implements Scene, Serializable {
 	private static final long serialVersionUID = 1L;
 	private GameScreen screen;
 	private Planet planet;
-	private Player player;
 	private JButton planetButton, confirmButton;
 	private JLabel outputLabel, inventoryLabel1, inventoryLabel2, moneyLabel;
 	private int level, money;
 	private Good[] buyGoods, sellGoods;
-	private Hashtable<String, Integer> inventory;
 	private Transaction trans;
 	private JRadioButton buyRadio, sellRadio;
 	private ButtonGroup buttonGroup;
@@ -37,13 +35,11 @@ public class Market implements Scene, Serializable {
 	 * @param Planet
 	 *            planet THe current planet.
 	 */
-	public Market(final GameScreen screen, Planet planet) {
-		
+	public Market(final GameScreen screen) {
 		this.screen = screen;
-		this.planet = planet;
-		this.player = screen.game.getPlayer();
-		inventory = player.getInventory();
-		trans = new Transaction(player, this);
+		this.planet = screen.game.getPlanet();
+		trans = new Transaction(screen, this);
+		Player player = screen.game.getPlayer();
 
 		buyRadio = new JRadioButton("Buy", true);
 		sellRadio = new JRadioButton("Sell", false);
@@ -96,6 +92,10 @@ public class Market implements Scene, Serializable {
 			if (e.getSource().equals(planetButton))
 				screen.setScene(screen.game.getPlanet());
 		}
+		
+		public String toString(){
+			return super.toString();
+		}
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class Market implements Scene, Serializable {
 	 */
 	private void refresh() {
 		// Set to screen.game.getPlayer();
-		player = screen.game.getPlayer();
+		Player player = screen.game.getPlayer();
 		inventoryLabel1.setText(player.getInventory1());
 		inventoryLabel2.setText(player.getInventory2());
 
@@ -164,23 +164,23 @@ public class Market implements Scene, Serializable {
 		buyGoods[0] = new Good(planet, this, trans, "Water", 0, 0, 2, 30, 3, 4,
 				30, 50, "DROUGHT".equals(planet.getSpecialEvent()));
 		buyGoods[1] = new Good(planet, this, trans, "Furs", 0, 0, 0, 250, 10,
-				10, 230, 280,"COLD".equals(planet.getSpecialEvent()));
+				10, 230, 280, "COLD".equals(planet.getSpecialEvent()));
 		buyGoods[2] = new Good(planet, this, trans, "Food", 1, 0, 1, 100, 5, 5,
-				90, 160,"CROPFAIL".equals(planet.getSpecialEvent()));
+				90, 160, "CROPFAIL".equals(planet.getSpecialEvent()));
 		buyGoods[3] = new Good(planet, this, trans, "Ore", 2, 2, 3, 350, 20,
-				10, 350, 420,"WAR".equals(planet.getSpecialEvent()));
+				10, 350, 420, "WAR".equals(planet.getSpecialEvent()));
 		buyGoods[4] = new Good(planet, this, trans, "Games", 3, 1, 6, 250, -10,
-				5, 160, 270,"BOREDOM".equals(planet.getSpecialEvent()));
+				5, 160, 270, "BOREDOM".equals(planet.getSpecialEvent()));
 		buyGoods[5] = new Good(planet, this, trans, "Firearms", 3, 1, 5, 1250,
-				-75, 100, 600, 1100,"WAR".equals(planet.getSpecialEvent()));
+				-75, 100, 600, 1100, "WAR".equals(planet.getSpecialEvent()));
 		buyGoods[6] = new Good(planet, this, trans, "Medicine", 4, 1, 6, 650,
-				-20, 10, 400, 700,"PLAGUE".equals(planet.getSpecialEvent()));
+				-20, 10, 400, 700, "PLAGUE".equals(planet.getSpecialEvent()));
 		buyGoods[7] = new Good(planet, this, trans, "Machines", 4, 3, 5, 900,
-				-30, 5, 600, 800,"LACKOFWORKERS".equals(planet.getSpecialEvent()));
+				-30, 5, 600, 800, "LACKOFWORKERS".equals(planet.getSpecialEvent()));
 		buyGoods[8] = new Good(planet, this, trans, "Narcotics", 5, 0, 5, 3500,
-				-125, 150, 2000, 3000,"BOREDOM".equals(planet.getSpecialEvent()));
+				-125, 150, 2000, 3000, "BOREDOM".equals(planet.getSpecialEvent()));
 		buyGoods[9] = new Good(planet, this, trans, "Robots", 6, 4, 7, 5000,
-				-150, 100, 3500, 5000,"LACKOFWORKERS".equals(planet.getSpecialEvent()));
+				-150, 100, 3500, 5000, "LACKOFWORKERS".equals(planet.getSpecialEvent()));
 
 //		buyGoods[0] = new Good(planet, this, trans, "Water", 0, 0, 2, 30, 3, 4,
 //				30, 50,true);
@@ -277,5 +277,9 @@ public class Market implements Scene, Serializable {
 	 */
 	public boolean buy() {
 		return buyRadio.isSelected();
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }

@@ -1,4 +1,4 @@
-import javax.swing.*;
+import javax.swing.JFrame;
 
 /**
  * Driver class for the Space Trader game.

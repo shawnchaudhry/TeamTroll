@@ -1,8 +1,16 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Scene to display the planets of the universe. Also represents actual planet
@@ -22,9 +30,14 @@ public class Planet implements Scene, Serializable {
 	private Point loc;
 	private final JLabel planetNameLabel, planetTechLabel, planetSpecialEventLabel,
 			planetPolLabel;
+<<<<<<< HEAD
 	private final JButton marketButton, universeButton;
 	private final Market market;
 	private final Rectangle planetRect;
+=======
+	private JButton marketButton, universeButton;
+	private Rectangle planetRect;
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 	
 	private final Random rand = new Random();
 	private final String specialEvent;
@@ -64,7 +77,7 @@ public class Planet implements Scene, Serializable {
 //		this.res = res;
 		this.pol = pol;
 		img = new ImageIcon(filename);
-		market = new Market(screen, this);
+	
 		planetRect = new Rectangle(loc, new Dimension(img.getIconWidth(),
 				img.getIconHeight()));
 		planetNameLabel = new JLabel("Planet Name: " + name, JLabel.CENTER);
@@ -89,7 +102,7 @@ public class Planet implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				screen.setScene(market);
+				screen.setScene(new Market(screen));
 			}
 		});
 
@@ -231,5 +244,9 @@ public class Planet implements Scene, Serializable {
 	
 	public String getSpecialEvent(){
 		return specialEvent;
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }

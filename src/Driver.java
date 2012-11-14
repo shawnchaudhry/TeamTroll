@@ -17,14 +17,14 @@ import javax.swing.JOptionPane;
 // it in main. If I put it in main, it would always turn out to be static somehow so I just decided to put it in here.
 
 public class Driver {
-	JFrame frame;
-	GameScreen gameScreen;
-	JMenuBar menuBar;
-	JMenu fileMenu;
-	JMenuItem newGame;
-	JMenuItem loadGame;
-	JMenuItem saveGame;
-	JFileChooser fc;
+	public JFrame frame;
+	public GameScreen gameScreen;
+	public JMenuBar menuBar;
+	public JMenu fileMenu;
+	public JMenuItem newGame;
+	public JMenuItem loadGame;
+	public JMenuItem saveGame;
+	public JFileChooser fc;
 
 	public Driver() {
 
@@ -129,5 +129,9 @@ public class Driver {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.pack();
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }

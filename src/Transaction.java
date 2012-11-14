@@ -1,7 +1,7 @@
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-import java.util.*;
+import java.util.Hashtable;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Represents a transaction of goods in the market.
@@ -11,8 +11,13 @@ import java.util.*;
  */
 @SuppressWarnings("serial")
 public class Transaction extends JPanel {
+<<<<<<< HEAD
 	private final JLabel transLabel;
 	private Player player;
+=======
+	private GameScreen screen;
+	private JLabel transLabel;
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 	private Market market;
 	private int balance, change;
 	private Hashtable<String, Integer> trans;
@@ -23,8 +28,9 @@ public class Transaction extends JPanel {
 	 * @param GameScreen
 	 *            screen The screen of the game.
 	 */
-	public Transaction(Player player, Market market) {
-		this.player = player;
+	public Transaction(final GameScreen screen, Market market) {
+		Player player = screen.game.getPlayer();
+		this.screen = screen;
 		this.market = market;
 		balance = player.getMoney();
 		trans = new Hashtable<String, Integer>();
@@ -34,7 +40,7 @@ public class Transaction extends JPanel {
 
 		transLabel = new JLabel("Transaction: $" + balance + " + (" + change
 				+ ") = $" + getNewBalance() + "      Cargo Space Remaining: "
-				+ (player.getShip().getCargoBay() - numItems()));
+				+ (player.getShip().getCargoBay() - player.numItems()));
 
 		add(transLabel);
 	}
@@ -47,6 +53,8 @@ public class Transaction extends JPanel {
 	 * @param int price The price of the good.
 	 */
 	public int add(String good, int price) {
+		Player player = screen.game.getPlayer();
+
 		if (market.buy() && 0 < balance + change - price
 				&& numItems() <= player.getShip().getCargoBay()) {
 			trans.put(good, trans.get(good) + 1);
@@ -114,15 +122,9 @@ public class Transaction extends JPanel {
 	 * Refreshes the transaction's display label.
 	 */
 	private void refresh() {
-		transLabel
-				.setText("Transaction: $"
-						+ balance
-						+ " + ("
-						+ change
-						+ ") = $"
-						+ getNewBalance()
-						+ "      Cargo Space Remaining: "
-						+ (player.getShip().getCargoBay() - player.numItems() - numItems()));
+		transLabel.setText("Transaction: $"	+ balance + " + (" + change + ") = $" + getNewBalance()
+						+ "      Cargo Space Remaining: " + (screen.game.getPlayer().getShip().getCargoBay() 
+						- screen.game.getPlayer().numItems() - numItems()));
 	}
 
 	/**
@@ -131,11 +133,15 @@ public class Transaction extends JPanel {
 	 * @return Transaction The results of the transaction.
 	 */
 	public Transaction confirm() {
+<<<<<<< HEAD
 		final Hashtable<String, Integer> playerInventory = player.getInventory();
+=======
+		Player player = screen.game.getPlayer();
+		Hashtable<String, Integer> playerInventory = player.getInventory();
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 
 		for (String good : trans.keySet())
-			playerInventory.put(good,
-					playerInventory.get(good) + trans.get(good));
+			playerInventory.put(good, playerInventory.get(good) + trans.get(good));
 
 		// System.out.println("Confirm method in transaction: ");
 		// printInventory(playerInventory);
@@ -147,9 +153,10 @@ public class Transaction extends JPanel {
 		trans = new Hashtable<String, Integer>();
 		balance = player.getMoney();
 
-		for (String good : player.getInventory().keySet())
+		for (String good : screen.game.getPlayer().getInventory().keySet())
 			trans.put(good, 0);
 
+		screen.game.setPlayer(player);
 		refresh();
 
 		return this;

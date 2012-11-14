@@ -4,8 +4,8 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class RandomEvents {
-	Random rand;
-	Player player;
+	public Random rand;
+	public Player player;
 
 	public RandomEvents(Player player) {
 		rand = new Random();
@@ -82,5 +82,7 @@ public class RandomEvents {
 			}
 		}
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }

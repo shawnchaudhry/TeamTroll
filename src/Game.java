@@ -1,5 +1,6 @@
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+
 
 /**
  * Database for the game. Saves the state of the game. Contains various methods
@@ -153,5 +154,7 @@ public class Game implements Serializable {
 		setUniverse(new Universe(screen));
 		screen.setScene(universe);
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }

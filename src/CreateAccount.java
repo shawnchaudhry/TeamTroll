@@ -1,6 +1,12 @@
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Scene to let user make an account.
@@ -16,9 +22,8 @@ public class CreateAccount implements Scene {
 
 	/**
 	 * Creates the create account scene.
-	 * 
-	 * @param GameScreen
-	 *            screen The screen of the game.
+	 *
+	 * @param screen the screen
 	 */
 	public CreateAccount(final GameScreen screen) {
 		this.screen = screen;
@@ -37,11 +42,10 @@ public class CreateAccount implements Scene {
 			/**
 			 * Creates a new account.
 			 * 
-			 * @param ActionEvent
-			 *            e The created action event.
+			 * @param ActionEvent e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				createAccount();
+				createUserAccount();
 			}
 		});
 
@@ -62,11 +66,18 @@ public class CreateAccount implements Scene {
 	/**
 	 * Creates the user account with the text entered in the fields.
 	 */
+<<<<<<< HEAD
 	public boolean createAccount() {
 		
 		final String user = userText.getText();
 		final String pass = passText.getText();
 		final String repass = repassText.getText();
+=======
+	public void createUserAccount() {
+		String user = userText.getText();
+		String pass = passText.getText();
+		String repass = repassText.getText();
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 
 		if (user.length() == 0)
 			outputLabel.setText("Must enter a username.");
@@ -115,5 +126,9 @@ public class CreateAccount implements Scene {
 		p.add(backButton);
 
 		p.revalidate();
+	}
+	
+	public String toString(){
+		return super.toString();
 	}
 }

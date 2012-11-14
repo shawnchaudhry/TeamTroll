@@ -1,5 +1,6 @@
 import java.io.Serializable;
-import java.util.*;
+import java.util.Hashtable;
+
 
 /**
  * Class representing the Player of the game.
@@ -251,6 +252,9 @@ public class Player implements Serializable {
 		for (String good : inventory.keySet()) {
 			System.out.println(good + ": " + inventory.get(good));
 		}
+	}
+	public String toString(){
+		return super.toString();
 	}
 
 }

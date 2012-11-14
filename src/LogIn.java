@@ -1,8 +1,13 @@
-import java.awt.event.*;
-import java.awt.*;
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Scene to let user log into game.
@@ -45,7 +50,7 @@ public class LogIn implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				login();
+				loginUser();
 			}
 		});
 
@@ -78,9 +83,15 @@ public class LogIn implements Scene, Serializable {
 	 * Checks if login data is valid. If so, goes to the create player scene.
 	 * Otherwise, goes to the universe screen.
 	 */
+<<<<<<< HEAD
 	public void login() {
 		final String userInput = userText.getText();
 		final String passInput = passText.getText();
+=======
+	public void loginUser() {
+		String userInput = userText.getText();
+		String passInput = passText.getText();
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 		// So I rewrote the Game.checkAccount, Game.getPlayer, etc. to
 		// screen.game.checkAccount etc.
 		// I really thought it'd be easier to access the information this way
@@ -122,5 +133,7 @@ public class LogIn implements Scene, Serializable {
 
 		p.revalidate();
 	}
-
+	public String toString(){
+		return super.toString();
+	}
 }
