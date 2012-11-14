@@ -24,16 +24,26 @@ public class Universe implements Scene, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ImageIcon background, shipIcon;
-	private Planet[] planets;
+	private final ImageIcon background, shipIcon;
+	private final Planet[] planets;
 	private int numPlanets = 13;
+<<<<<<< HEAD
+	private final GameScreen screen;
+	private final JTextField currentPlanetText, destPlanetText, fuelText;
+	private final JButton landButton, travelButton;
+	private Planet planet, destPlanet;
+	private final Random rand;
+	private final Player player;
+	private final Ship ship;
+	private final String[] namesArr = { "Acamar", "Adahn", "Aldea", "Andevian",
+=======
 	private GameScreen screen;
 	private JTextField currentPlanetText, destPlanetText, fuelText;
 	private JButton landButton, travelButton;
-	private Planet planet, destPlanet;
+	private Planet destPlanet;
 	private Random rand;
-	private Ship ship;
 	private String[] namesArr = { "Acamar", "Adahn", "Aldea", "Andevian",
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 			"Antedi", "Balosnee", "Baratas", "Brax", "Bretel", "Calondia",
 			"Campor", "Capelle", "Carzon", "Castor", "Cestus", "Cheron",
 			"Courteney", "Daled", "Damast", "Davlos", "Deneb", "Deneva",
@@ -54,29 +64,29 @@ public class Universe implements Scene, Serializable {
 			"Vadera", "Vagra", "Vandor", "Ventax", "Xenon", "Xerxes", "Yew",
 			"Yojimbo", "Zalkon", "Zuul" };
 
-	private String[] shipArr = { "img/spaceship1.png" };
+	private final String[] shipArr = { "img/spaceship1.png" };
 
-	private Point[] loc = { new Point(25, 135), new Point(155, 165),
+	private final Point[] loc = { new Point(25, 135), new Point(155, 165),
 			new Point(275, 115), new Point(400, 125), new Point(120, 270),
 			new Point(355, 240), new Point(110, 410), new Point(240, 340),
 			new Point(320, 410), new Point(410, 440), new Point(40, 510),
 			new Point(370, 540), new Point(260, 560) };
 
-	private String[] tech = { "Pre-Agriculture", "Medieval", "Renaissance",
+	private final String[] tech = { "Pre-Agriculture", "Medieval", "Renaissance",
 			"Early Industrial", "Industrial", "Post-Industrial", "Hi-Tech" };
 
-	private String[] res = { "NOSPECIALRESOURCES", "MINERALRICH",
+	private final String[] res = { "NOSPECIALRESOURCES", "MINERALRICH",
 			"MINERALPOOR", "DESERT", "LOTSOFWATER", "RICHSOIL", "POORSOIL",
 			"RICHFAUNA", "LIFELESS", "WEIRDMUSHROOMS", " LOTSOFHERBS",
 			" ARTISTIC", " WARLIKE", "NOSPECIALRESOURCES",
 			"NOSPECIALRESOURCES", "NOSPECIALRESOURCES" };
 
-	private String[] pol = { "Anarchy", "Capitalist State", "Communist State",
+	private final String[] pol = { "Anarchy", "Capitalist State", "Communist State",
 			"Confederacy", "Corporate State", "Cybernetic State", "Democracy",
 			"Dictatorship", "Fascist State", "Feudal State", "Military State",
 			"Monarchy", "Pacifist State", "Socialist State", "State of Satori" };
 
-	private String[] filenames = { "img/planet0.png", "img/planet1.png",
+	private final String[] filenames = { "img/planet0.png", "img/planet1.png",
 			"img/planet2.png", "img/planet3.png", "img/planet4.png",
 			"img/planet5.png", "img/planet6.png", "img/planet7.png",
 			"img/planet8.png", "img/planet9.png", "img/planet10.png",
@@ -108,6 +118,7 @@ public class Universe implements Scene, Serializable {
 	public Universe(final GameScreen screen) {
 		this.screen = screen;
 		rand = new Random();
+		final Ship ship = screen.game.getPlayer().getShip();
 
 		background = new ImageIcon("img/spacebackground.png");
 		int nameLength = namesArr.length, fileLength = filenames.length, nameNum, fileNum;
@@ -131,14 +142,13 @@ public class Universe implements Scene, Serializable {
 			filenames[fileNum] = filenames[fileLength];
 		}
 
-		planet = planets[rand.nextInt(13)];
 		// set to screen.game.setPlanet(planet)
 		// and screen.game.setUniverse(this).
+		final Planet planet = planets[rand.nextInt(13)];
 		screen.game.setPlanet(planet);
 		screen.game.setUniverse(this);
 
 		// Changed to screen.game.getPlayer();
-		ship = screen.game.getPlayer().getShip();
 		currentPlanetText = new JTextField("Current Planet: "
 				+ planet.getName(), 25);
 		destPlanetText = new JTextField("Destination Planet: "
@@ -174,13 +184,19 @@ public class Universe implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+				
+				final int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
+=======
+				Planet planet = screen.game.getPlanet();
 				int cost = calcFuel(planet.getLoc(), destPlanet.getLoc());
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 				if (rand.nextInt(5) == 0) {
 					new RandomEvents(screen.game.getPlayer());
 				}
 				if (destPlanet != null && cost <= ship.getFuel()) {
 					ship.decreaseFuel(cost);
-					planet = destPlanet;
+					screen.game.setPlanet(destPlanet);
 					refresh();
 				} else
 					fuelText.setText("Not enough Fuel");
@@ -197,14 +213,16 @@ public class Universe implements Scene, Serializable {
 	 *            g The graphics to the corresponding page.
 	 */
 	public void paint(JPanel p, Graphics g) {
+		final Planet planet = screen.game.getPlanet();
+		
 		p.removeAll();
 
 		background.paintIcon(null, g, 0, 0);
 
-		for (Planet planet : planets)
-			planet.draw(p, g);
+		for (Planet pl : planets)
+			pl.draw(p, g);
 
-		Point currLoc = planet.getLoc();
+		final Point currLoc = planet.getLoc();
 		shipIcon.paintIcon(null, g, currLoc.x, currLoc.y);
 
 		p.add(currentPlanetText);
@@ -219,8 +237,7 @@ public class Universe implements Scene, Serializable {
 					if (p.getRect().contains(e.getPoint())) {
 						travelButton.setEnabled(true);
 						destPlanet = p;
-						destPlanetText.setText("Destination Planet: "
-								+ p.getName());
+						destPlanetText.setText("Destination Planet: " + p.getName());
 						calcFuel(planet.getLoc(), destPlanet.getLoc());
 					}
 			}
@@ -236,19 +253,8 @@ public class Universe implements Scene, Serializable {
 	public void refresh() {
 		screen.setScene(this);
 		// Changed to screen.game.setPlanet(planet);
-		screen.game.setPlanet(planet);
-		currentPlanetText.setText("Current Planet: " + planet.getName());
-		fuelText.setText("Fuel: " + ship.getFuel() + " Fuel Cost: " + 0);
-	}
-
-	/**
-	 * returns a planet at index i
-	 * 
-	 * @param i
-	 * @return the planet at i
-	 */
-	public Planet getPlanet(int i) {
-		return planets[i];
+		currentPlanetText.setText("Current Planet: " + screen.game.getPlanet().getName());
+		fuelText.setText("Fuel: " + screen.game.getPlayer().getShip().getFuel() + " Fuel Cost: " + 0);
 	}
 
 	/**

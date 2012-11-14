@@ -26,16 +26,22 @@ public class Planet implements Scene, Serializable {
 	private static final long serialVersionUID = 1L;
 	private GameScreen screen;
 	private String name, tech, /*res,*/ pol;
-	private ImageIcon img;
+	private final ImageIcon img;
 	private Point loc;
-	private JLabel planetNameLabel, planetTechLabel, planetSpecialEventLabel,
+	private final JLabel planetNameLabel, planetTechLabel, planetSpecialEventLabel,
 			planetPolLabel;
+<<<<<<< HEAD
+	private final JButton marketButton, universeButton;
+	private final Market market;
+	private final Rectangle planetRect;
+=======
 	private JButton marketButton, universeButton;
 	private Rectangle planetRect;
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 	
-	private Random rand = new Random();
-	private String specialEvent;
-	private String []  allEvents = {  "DROUGHT" , "ALLGOOD" ,  "COLD" , "CROPFAIL", "WAR", "BOREDOM", "WAR","PLAGUE"
+	private final Random rand = new Random();
+	private final String specialEvent;
+	private final String []  allEvents = {  "DROUGHT" , "ALLGOOD" ,  "COLD" , "CROPFAIL", "WAR", "BOREDOM", "WAR","PLAGUE"
 			,"LACKOFWORKERS",  "BOREDOM", "LACKOFWORKERS"};
 
 	

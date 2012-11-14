@@ -11,8 +11,13 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class Transaction extends JPanel {
+<<<<<<< HEAD
+	private final JLabel transLabel;
+	private Player player;
+=======
 	private GameScreen screen;
 	private JLabel transLabel;
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 	private Market market;
 	private int balance, change;
 	private Hashtable<String, Integer> trans;
@@ -128,8 +133,12 @@ public class Transaction extends JPanel {
 	 * @return Transaction The results of the transaction.
 	 */
 	public Transaction confirm() {
+<<<<<<< HEAD
+		final Hashtable<String, Integer> playerInventory = player.getInventory();
+=======
 		Player player = screen.game.getPlayer();
 		Hashtable<String, Integer> playerInventory = player.getInventory();
+>>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 
 		for (String good : trans.keySet())
 			playerInventory.put(good, playerInventory.get(good) + trans.get(good));

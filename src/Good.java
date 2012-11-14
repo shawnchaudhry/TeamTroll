@@ -17,11 +17,11 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class Good extends JPanel {
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	private Planet planet;
 	private Transaction trans;
-	private JLabel nameLabel, priceLabel, quantityLabel;
-	private JButton plusButton, minusButton;
+	private final JLabel nameLabel, priceLabel, quantityLabel;
+	private final JButton plusButton, minusButton;
 	private String name;
 	private int price, quantity;
 

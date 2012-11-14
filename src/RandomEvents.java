@@ -18,7 +18,7 @@ public class RandomEvents {
 	}
 
 	private void policeEncounter() {
-		int policeStrength = rand.nextInt(17);
+		final int policeStrength = rand.nextInt(17);
 		if (player.getPilot() > policeStrength) {
 			JOptionPane.showMessageDialog(null,
 					"Congratulations, you have outran the police!");
@@ -26,14 +26,14 @@ public class RandomEvents {
 			JOptionPane.showMessageDialog(null, "The police let you go.");
 		} else {
 			if (player.getMoney() > 0) {
-				int fine = rand.nextInt(player.getMoney());
+				final int fine = rand.nextInt(player.getMoney());
 				JOptionPane.showMessageDialog(null,
 						"The police caught you and fined you: $" + fine);
 				player.setMoney(player.getMoney() - fine);
 			} else {
 				// Dont know if this is the best idea because how often will the
 				// player have exactly $0?
-				Iterator<String> it = player.getInventory().keySet().iterator();
+				final Iterator<String> it = player.getInventory().keySet().iterator();
 				JOptionPane
 						.showMessageDialog(null,
 								"The police caught you, and since you're broke they took some cargo");
@@ -55,7 +55,7 @@ public class RandomEvents {
 	}
 
 	private void piratesEncounter() {
-		int pirateStrength = rand.nextInt(17);
+		final int pirateStrength = rand.nextInt(17);
 		if (player.getFight() > pirateStrength) {
 			JOptionPane.showMessageDialog(null,
 					"Congratulations, you have defeated the pirates!");
@@ -63,7 +63,7 @@ public class RandomEvents {
 			JOptionPane.showMessageDialog(null,
 					"You make it away from the pirates unharmed.");
 		} else {
-			Iterator<String> it = player.getInventory().keySet().iterator();
+			final Iterator<String> it = player.getInventory().keySet().iterator();
 			JOptionPane
 					.showMessageDialog(null,
 							"The pirates defeated you and are now taking whatever they like!");

@@ -178,7 +178,7 @@ public class Player implements Serializable {
 	 */
 	public String getInventory1() {
 		generateInventoryString();
-		int split = inventoryString.indexOf("Furs");
+		final int split = inventoryString.indexOf("Furs");
 		return inventoryString.substring(0, split);
 	}
 
@@ -191,7 +191,7 @@ public class Player implements Serializable {
 	 */
 	public String getInventory2() {
 		generateInventoryString();
-		int split = inventoryString.indexOf("Furs");
+		final int split = inventoryString.indexOf("Furs");
 		return "| "
 				+ inventoryString.substring(split, inventoryString.length());
 	}

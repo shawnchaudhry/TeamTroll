@@ -14,11 +14,11 @@ import javax.swing.JTextField;
  * @version 1.0
  */
 public class CreatePlayer implements Scene {
-	private JLabel playerNameLabel, fightLabel, tradeLabel, enginLabel,
+	private final JLabel playerNameLabel, fightLabel, tradeLabel, enginLabel,
 			pilotLabel, statsLabel, outputLabel;
-	private JTextField playerNameText;
+	private final JTextField playerNameText;
 	private int stats, fight, trade, engin, pilot;
-	private JButton fightPlusButton, fightMinusButton, tradePlusButton,
+	private final JButton fightPlusButton, fightMinusButton, tradePlusButton,
 			tradeMinusButton, enginPlusButton, enginMinusButton,
 			pilotPlusButton, pilotMinusButton, createButton;
 
@@ -76,7 +76,7 @@ public class CreatePlayer implements Scene {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				String playerName = playerNameText.getText();
+				final String playerName = playerNameText.getText();
 				if (playerName.length() == 0)
 					outputLabel.setText("Must enter player name.");
 				else if (stats != 0)

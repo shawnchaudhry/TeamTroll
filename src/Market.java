@@ -84,12 +84,12 @@ public class Market implements Scene, Serializable {
 		 *            e The created action event.
 		 */
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == confirmButton)
+			if (e.getSource().equals(confirmButton))
 				trans = trans.confirm();
 
 			refresh();
 			// Again, I set it to screen.game.getPlanet();
-			if (e.getSource() == planetButton)
+			if (e.getSource().equals(planetButton))
 				screen.setScene(screen.game.getPlanet());
 		}
 		
