@@ -17,7 +17,7 @@ public class Good extends JPanel {
 	private final JLabel nameLabel, priceLabel, quantityLabel;
 	private final JButton plusButton, minusButton;
 	private String name;
-	private final int price, quantity;
+	private int price, quantity;
 
 	private final int MTLP, MTLU, TTP, BP, IPL, VAR, MTL, MTH;
 	private boolean IE;

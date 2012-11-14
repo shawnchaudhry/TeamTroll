@@ -13,7 +13,7 @@ public class Player implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name, inventoryString;
-	final private int fight, trade, engin, pilot, money, cargoBay;
+	private int fight, trade, engin, pilot, money, cargoBay;
 	private Hashtable<String, Integer> inventory;
 	private Ship ship;
 
