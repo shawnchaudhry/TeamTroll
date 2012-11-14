@@ -1,7 +1,7 @@
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-import java.util.*;
+import java.util.Hashtable;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Represents a transaction of goods in the market.

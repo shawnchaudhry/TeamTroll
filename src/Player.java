@@ -1,5 +1,6 @@
 import java.io.Serializable;
-import java.util.*;
+import java.util.Hashtable;
+
 
 /**
  * Class representing the Player of the game.
