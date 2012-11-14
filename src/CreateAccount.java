@@ -16,9 +16,9 @@ import javax.swing.JTextField;
  */
 public class CreateAccount implements Scene {
 	private GameScreen screen;
-	final private JTextField userText, passText, repassText;
-	final private JLabel userLabel, passLabel, repassLabel, outputLabel;
-	final private JButton createButton, backButton;
+	private JTextField userText, passText, repassText;
+	private JLabel userLabel, passLabel, repassLabel, outputLabel;
+	private JButton createButton, backButton;
 
 	/**
 	 * Creates the create account scene.
@@ -66,18 +66,10 @@ public class CreateAccount implements Scene {
 	/**
 	 * Creates the user account with the text entered in the fields.
 	 */
-<<<<<<< HEAD
-	public boolean createAccount() {
-		
-		final String user = userText.getText();
-		final String pass = passText.getText();
-		final String repass = repassText.getText();
-=======
 	public void createUserAccount() {
 		String user = userText.getText();
 		String pass = passText.getText();
 		String repass = repassText.getText();
->>>>>>> branch 'master' of https://github.com/shawnchaudhry/TeamTroll.git
 
 		if (user.length() == 0)
 			outputLabel.setText("Must enter a username.");
@@ -88,19 +80,10 @@ public class CreateAccount implements Scene {
 		else {
 			screen.game.addAccount(new UserAccount(user, pass));
 			screen.setScene(new LogIn(screen));
-			return true;
 		}
-		return false;
+
 		// Database.printAccounts();
 	}
-	
-	public void setText(String user,String pass,String repass)
-	{
-		userText.setText(user);
-		passText.setText(pass);
-		repassText.setText(repass);
-	}
-	
 
 	/**
 	 * Paints the components onto the screen.
