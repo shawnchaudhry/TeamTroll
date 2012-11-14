@@ -45,7 +45,7 @@ public class CreateAccount implements Scene {
 			 * @param ActionEvent e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				createAccount();
+				createUserAccount();
 			}
 		});
 
@@ -66,7 +66,7 @@ public class CreateAccount implements Scene {
 	/**
 	 * Creates the user account with the text entered in the fields.
 	 */
-	public void createAccount() {
+	public void createUserAccount() {
 		String user = userText.getText();
 		String pass = passText.getText();
 		String repass = repassText.getText();

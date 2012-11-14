@@ -50,7 +50,7 @@ public class LogIn implements Scene, Serializable {
 			 *            e The created action event.
 			 */
 			public void actionPerformed(ActionEvent e) {
-				login();
+				loginUser();
 			}
 		});
 
@@ -83,7 +83,7 @@ public class LogIn implements Scene, Serializable {
 	 * Checks if login data is valid. If so, goes to the create player scene.
 	 * Otherwise, goes to the universe screen.
 	 */
-	public void login() {
+	public void loginUser() {
 		String userInput = userText.getText();
 		String passInput = passText.getText();
 		// So I rewrote the Game.checkAccount, Game.getPlayer, etc. to
